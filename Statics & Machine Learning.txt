@@ -1849,3 +1849,103 @@ The logistic regression function converts the values of logits, also called log-
 What is Multicollinirity ? ->when the two column doing same thing that is Multicollinirity and 0.9 is the benchmark if less or more than 0.9 drop the column
 if i did not make Multicollinirity drop column it will not make any impact on the accuracy
 
+Logistic Regression Cardio Vascular prediction:
+cardiovascular diseases are the first leading cause of death across the world as well. World Health Organization has estimated that the mortality rate caused by heart diseases will mount to 23 million cases by 2030. Hence, the use of data mining algorithms could be useful in predicting coronary artery diseases. 
+
+Objective:
+The objective of this research is to build classifiers to predict whether a person has cardiovascular disease based on their medical test, age, and gender also also to identify which test is more reliable in determining cardiovascular disease.
+
+Knowledge of the risk factors associated with heart disease helps health care professionals to identify patients at high risk of having heart disease . Statistical analysis has identified the risk factors associated with heart disease to be age, blood pressure, smoking habit, total cholesterol, diabetes, hypertension, family history of heart disease, obesity, and lack of physical activity.
+
+# note:-Here family History, Other habits like Smoking,Alcohal etc are not inclused.
+
+Method:
+Collected patient data from four national hospital. Two from hospital in USA and two from Europe. 
+
+# import the basic library
+import os
+import numpy as np # linear algebra
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+#For plotting graphs
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
+import warnings
+warnings.filterwarnings("ignore")
+
+os.getcwd() ->path
+df=pd.read_csv("Cardio_vascular.csv")
+
+FIRST STEP is to understand the Problem Statements, Different Independents and Dependent Variable.
+
+The dataset used in this article is the Cleveland Heart Disease dataset. There are 14 columns in the dataset,
+which are described below.
+1.Age, in years
+2.Sex, 1 = male; 0 = female
+3.cp: chest pain type – Value 0: typical angina – Value 1: atypical angina – Value 2: non-anginal pain – Value 3: asymptomatic
+4.trestbps: resting blood pressure (in mm Hg on admission to the hospital)
+5.chol: serum cholestoral in mg/dAttribute Information:
+6.fbs: (fasting blood sugar > 120 mg/dl) 1 = true; 0 =false
+7.restecg: resting electrocardiographic results – Value 0: normal – Value 1: having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of >0.05 mV) – Value 2: showing probable or     definite left ventricu lar hypertrophy by Estes’ criteria
+8.thalach: maximum heart rate achieved during stress TEST
+9.exang: exercise induced angina, 1 = yes; 0 = no
+10.oldpeak = ST depression induced by exercise relative to rest
+11.slope: the slope of the peak exercise ST segment – Value 0: upsloping – Value 1: flat – Value 2: downsloping
+12.ca: number of major vessels (0-4) colored by flourosopy
+13.thal: thalassmia, 0 = null; 1=normal; 2 = fixed defect; 3 = reversible defect
+14.condition (target) : 0 = no disease, 1 = disease
+
+changing the name of the columns for better understanding:
+df.rename(columns={"sex":"gender","cp":"rest_cp","trestbps":"rest_bp","chol":"cholesterol","fbs":"fast_bloodsugar",
+                   "restecg":"rest_ecg","thalach":"stress_HR","exang":"Exercise_cp","oldpeak":"STdepression_Exerc",
+                   "slope":"STpeak_exerc","ca":"coloured_vessels","thal":"thalassmia","target":"heart_disease"},inplace=True)
+
+# condition (target) : 0 = no disease, 1 = disease
+# We can say ; Cardiovascular diseases maximum risk at age 40-65 age
+#sex  (0 = female, 1 = male )
+
+# condition (target) : 0 = no disease, 1 = disease
+#cp (0 = , 1 = male,2=,3= )
+
+# lets check the missing value:
+df.isnull().sum()
+
+#splitting the data into independent and dependent variable:
+X=df.drop(["heart_disease"],axis=1)
+Y=df["heart_disease"]
+
+# scaling the data set:
+from sklearn.preprocessing import StandardScaler
+scaljob=StandardScaler()
+X_scaled=scaljob.fit_transform(X)
+X_scaled
+
+# We can convert it in dataframe:
+X_scaled_df=pd.DataFrame(X_scaled,index=X.index,columns=X.columns)
+X_scaled_df
+
+# collinear cofficient
+df.corr()
+
+plt.figure(figsize=(10,7))
+sns.heatmap(df.corr(),annot=True)
+
+# split the data in training and testing 
+from sklearn.model_selection import train_test_split
+X_train,X_test,Y_train,Y_test=train_test_split(X_scaled_df,Y,test_size=0.2,random_state=101)
+
+# logistic Regression Model busilding
+from sklearn.linear_model import LogisticRegression
+lr=LogisticRegression()
+lr.fit(X_train,Y_train)
+Y_predict_train=lr.predict(X_train)
+Y_predict_test=lr.predict(X_test)
+
+# model accuracy :
+from sklearn.metrics import accuracy_score,confusion_matrix,classification_report
+
+# training accuracy:
+accuracy_score(Y_train,Y_predict_train)
+
+# testing accuracy:
+accuracy_score(Y_test,Y_predict_test)

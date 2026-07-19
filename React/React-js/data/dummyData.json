@@ -1,0 +1,5 @@
+{"courses": [
+    { "id": 1, "name": "HTML", "price": 299, "image": "http://localhost:3000/assets/HTML.png", "show": true, "author": "Surya", "hours": 42, "rating": 4.8, "originalPrice": 999, "offer": 80},
+    { "id": 2, "name": "CSS", "price": 399, "image": "http://localhost:3000/assets/CSS.png", "show": false, "author": "Harish", "hours": 36, "rating": 4.6, "originalPrice": 799, "offer": 70},
+    { "id": 3, "name": "JavaScript", "price": 499, "image": "http://localhost:3000/assets/JavaScript.png", "show": true, "author": "Sugumar", "hours": 50, "rating": 4.9, "originalPrice": 1299, "offer": 85}
+]}

@@ -1,0 +1,1851 @@
+Statics & Machine Learning
+
+Drive link:https://drive.google.com/drive/folders/1k7ocDrox0FKvpm6TBVPXqkC2p0_UIdYv
+
+Statistics
+Statistical Thinking
+Statistics is the science of learning from data.
+Statistics is a set of equations that allows us to solve complex problems.
+
+But very simple and practical definition of statistics is: -.
+"Statistics is the science of making decisions under uncertainty."
+
+Sampling is important
+
+Mean -> sum of all values / total no.of values
+Median -> order the number in ascending order and take middle number
+Mode -> where number duplicate count is high
+
+when the values or outlayered use Median
+
+when there is no outlayer Mean and Median result is almost same
+
+Data Visualization :-
+Visual presentation of large data is easy to understand.
+Concise and effective communication.
+
+Machine learning has two Types:
+Supervisod -> we will train data like we will give question and we will give answer for that questions
+UnSupervisod -> we will train data like we will give question and the answer will be yours
+
+Supervised has two types:
+Regression -> it is gives continuous predicted values like how much loan amount i will get
+Classification -> it is prediction like yes (or) no, 1 (or) 0, true (or) false etc it will predict like manager will approve my loan or not
+
+Line Chart
+A line chart is, as one can imagine, a line or multiple lines showing how single or multiple variables develop over time.
+
+Pie Chart
+A pie chart is a circular graph divided into slices. The larger a slice is, the bigger portion of the total quantity it represents.
+
+Bar Graph
+A bar chart or bar graph is a chart or graph that presents categorical data with rectangular bars with heights or lengths proportional to the values that they represent. The bars can be plotted vertically or horizontally. Can be of one variable or many variable.
+
+Histogram
+A series of bins showing us the frequency of observations of a given variable.
+
+Scatter Plots
+A scatter plot is a great indicator that allows us to see whether there is a pattern to be found between two variables.
+E.g.: Positive or negative relationship.
+
+USE A BAR CHART
+WHEN comparing single or aggregate values (not percentages) between groups or demonstrating comparisons across items (for example, regions, products, or services).
+Example: sales revenue by region or department.
+
+USE A PIE CHART
+WHEN presenting the contribution of multiple groups to a total or the relation of a slice to the whole of the pie.
+Example: percentage of total sales revenue by region.
+
+USE A TIME SERIES GRAPH
+WHEN comparing a key performance indicator’s performance against its target value over time; line charts are often best for comparing series.
+Example: direct materials actual cost vs. budget cost for each quarter.
+
+Some tips :-
+➜ Line chart: corona progress, share market..
+➜ Difference in Bar and Histogram :-
+➜ (1) Histogram for one category, bar for various.
+➜ (2) Bar and column are for categorical dataset, can use for discrete, ordinal also.
+➜ Scatterplot :- Co-relation between two variables.
+X increases → Y increases = positive relation.
+X increases → Y decreases = negative relation.
+
+In Histogram frequency distribution in numbers that numbers will be converted per for better data viewing using Relative Frequency Distribution
+
+Different Charts and their use:-
+Types of charts	Description
+Line chart	Used for time series data
+Bar chart	Used to compare different categories
+Pie chart	Used to evaluate the share of each category
+Histogram	Used for continuous data and reveals the distribution
+Scatterplot	Used to evaluate relation between two variables
+
+Difference between Bar chart and Histogram is gap in Bar chart gap will be there in Histogram where no gap continuous values
+
+Different plots of Histogram
+1. Bi-Modal Distribution
+A histogram with two peaks or two modes.
+It indicates that the data has two frequently occurring ranges.
+
+2. Unitary Distribution
+A histogram where the data is distributed almost uniformly.
+All bars are nearly equal in height.
+
+3. Negatively Skewed (Left Skewed)
+The tail of the distribution is longer on the left side.
+Most values are concentrated on the right side.
+
+4. Positively Skewed (Right Skewed)
+The tail of the distribution is longer on the right side.
+Most values are concentrated on the left side.
+
+import numpy as np # linear algebra
+import pandas as pd # data processing , reading the csv file (pd.read_csv)
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
+#in jupyter notebook perfect display of plot inside the notebook.
+import warnings
+warnings.filterwarnings("ignore")
+
+import os
+os.getcwd() -> Current Working Directory
+ 
+data=pd.read_csv("HR_Employee_Attrition_Data1.csv") -> reading this csv file
+
+data.head() -> it will take first 5 rows of data
+
+empdf=data.copy() -> copying data variable to empdf variable
+empdf.head()
+
+empdf.info() -> It will show all columns head name and datatype like describing the table
+
+pd.set_option("display.max_columns",100) -> when i use empdf.head() it will show only 5 rows and 20 columns but using command i can see 100 columns
+empdf.head(10) -> we can see 10 rows of data
+
+empdf.tail() -> it will take last 5 rows of data
+
+COUNTPLOT:
+#countplot plot the count of the number of records by category
+#gender distribution
+plt.figure(figsize=(10,6)) -> figsize it is graph size
+sns.countplot(x=empdf["Gender"]) -> take which column to graph
+plt.title("Distribution of Gender in the company") -> it is the title of the graph
+plt.show() -> it will display the graph
+
+sns.countplot(x=empdf["Department"],hue=empdf["Gender"]) -> hue is like in the department how male ang female or there
+
+sns.countplot(x=empdf["Gender"],hue=empdf["MaritalStatus"],palette=sns.color_palette("RdBu")) -> palette set graph bar color
+
+plt.subplots(1,3,figsize=(20,10)) -> subplots is draw 1,3 means draw tree graphs
+
+plt.subplot(1,3,1) -> subplot 1,3 is the number of bars and the end 1 is subplots 1st graph
+
+sns.countplot(x=empdf["MaritalStatus"],hue=empdf["Attrition"])
+plt.title("Attriction level based on MartialStatus")
+
+plt.subplot(1,3,2) -> subplot 1,3 is the number of bars and the end 1 is subplots 2nd graph
+
+sns.countplot(x=empdf["Gender"],hue=empdf["MaritalStatus"],palette=sns.color_palette("RdBu"))
+plt.title("MaritalStatus level based on gender")
+
+plt.subplot(1,3,3) -> subplot 1,3 is the number of bars and the end 1 is subplots 3rd graph
+
+sns.countplot(x=empdf["Gender"],hue=empdf["MaritalStatus"],palette=sns.color_palette("RdBu"))
+plt.title("MaritalStatus level based on gender")
+
+plt.show()
+
+BAR PLOT:
+# bar plot or bar chart represents how a numerical variable relates to a categorical variables
+plt.figure(figsize=(14,6))
+ax=sns.barplot(data=empdf,x="EducationField",y="MonthlyRate")
+ax.set(ylabel="MONTHLYRATE") ->  make y axis lable
+plt.ylabel("MONTHLYRATE",fontsize=20) -> make y axis lable font size
+plt.show()
+
+ax=sns.barplot(x="EducationField",y="MonthlyRate",hue="Gender",data=empdf) -> we can also assign that dataset like this also "data=empdf"
+
+empdf["Gender"].value_counts() -> it used count number datas like in gender female having this no of counts and male having this no of counts
+
+histogram or histplot:
+# monthly income feature distribution
+plt.figure(figsize=(10,6))
+sns.histplot(x=empdf["MonthlyIncome"],color="magenta") -> make bar color
+
+sns.histplot(empdf["MonthlyIncome"],kde=True) -> kde stands for "Kernel Density Estimation" it will make graph curvy lines
+
+sns.histplot(x="Department",kde=False,data=empdf,stat="probability") -> it will change y axis count to probability
+sns.histplot(x="Department",kde=False,data=empdf,stat="density") -> it will change y axis count to density
+probability & density are same
+
+sns.histplot(x="Age",kde=True,data=empdf,stat="density",bins=10) -> bins are used for that i mentioned before bars it will make that no of bars
+sns.histplot(x="Age",kde=True,data=empdf,stat="density",binwidth=3) ->binwidth is used to make width of the bar
+
+lineplot:
+plt.figure(figsize=(10,6))
+sns.lineplot(x="Age",data=empdf,y="JobSatisfaction",dashes=False,ci=None) -> dashes and ci will make that in line plot graph there is shadow in the line that will removed
+plt.title("LINEPLOT")
+plt.show()
+
+In CountPlot & histogram the y axis column we don't give it is count itself
+In BarPlot & Linplot we want x axis and y axis column
+
+empdf.describe() -> describe data
+
+Pie Chart:
+plt.figure(figsize=(16,10))
+plt.pie(x=empdf["Attrition"].value_counts(),labels=empdf["Attrition"].value_counts().index,autopct="%0.2f%%") -> autopct should be used for show data percentage in pie chart
+plt.show()
+
+Boxplot:
+plt.figure(figsize=(16,10))
+sns.boxplot(data=empdf)
+
+Boxplot is help to visualize outlayer for example age data 8,9,10,9,10,29,30,8,11 the outlayers are 29,30
+
+Calculation Correlations:
+show the relationship between columns data
+corr=df1.corr()
+corr
+
+plt.figure(figsize=(16,10))
+corr=df1.corr()
+sns.heatmap((corr),annot=True) -> annot will display values of relationship data
+
+1. Types of Data (Variables)
+There are mainly 2 types of variables:
+A) Quantitative Variables
+These are numbers.
+Question asked: “How much?”
+
+1. Discrete Data
+Countable numbers
+Always whole numbers (integers)
+Examples:
+Number of kids = 2, 3, 4
+Number of training sessions = 1, 2, 3
+
+❌ Cannot be 2.5 kids
+
+2. Continuous Data
+Can have decimal values
+Infinite precision possible
+Examples:
+Height = 170.56 cm
+Sleep time = 7 hr 30 min 20 sec
+Distance = 70.97 meters
+B) Categorical Variables
+
+These describe categories or types.
+Question asked: “What type?”
+1. Nominal Data
+Categories with NO order
+Examples:
+Colors = Red, Blue, Yellow
+Gender = Male/Female
+Blood group = A, B, AB, O
+2. Ordinal Data
+Categories with order/ranking
+Examples:
+Grades = A++, A+, A, B+
+Feedback = Good, Average, Bad
+
+Here comparison is possible.
+
+2. Converting Data Types
+Sometimes one data type can be converted into another using cut-off values.
+Example:
+Blood pressure:
+Above 90 → Hypertension
+Below or equal to 90 → Normal
+
+Height:
+Short
+Average
+Tall
+
+So continuous data becomes categorical/ordinal data.
+
+3. Basic Statistical Measurements
+Important statistical concepts:
+Mean
+Median
+Mode
+Variance
+Standard Deviation
+Quartile Range
+
+In Python Pandas:
+df.describe()
+
+This function gives summary statistics.
+
+What df.describe() Shows
+Count
+
+Number of observations (rows)
+Mean
+Average value
+Standard Deviation (std)
+Shows how far values spread from mean
+Min
+Smallest value
+Max
+Largest value
+Percentiles (25%, 50%, 75%)
+Quartile information
+Mode
+Most repeated value
+Median
+Middle value
+
+4. Mean (Average)
+Mean = Total Sum ÷ Number of Values
+Formula
+Mean=Number of observations/Sum of observations
+	​
+Find mean of first 10 odd numbers:
+1,3,5,7,9,11,13,15,17,19
+Sum = 100
+Mean = 100 ÷ 10 = 10
+✅ Mean = 10
+
+5. Median
+Median = Middle value after arranging data in order.
+When Number of Values is Odd
+Median=(2n+1​)th observation
+
+When Number of Values is Even
+Median=2(2n​)th observation+(2n​+1)th observation​
+
+If middle two values are:
+21
+21
+
+Median:
+(21 + 21) / 2 = 21
+✅ Median = 21
+
+6. Mode
+Mode = Most frequently repeated value.
+19,19,21,21,28,28,66,66,66,66
+
+66 appears maximum times.
+✅ Mode = 66
+
+7. Variance
+Variance tells:
+“How spread out the data is”
+Large variance → Data widely scattered
+Small variance → Data close together
+
+Examples:
+IPL player scores
+Pizza delivery time
+Equipment lifetime
+
+8. Standard Deviation
+Standard deviation is the square root of variance.
+
+Formula
+σ=N∑(xi−μ)2
+	​
+Easy Understanding
+Low Standard Deviation
+Values are close to mean.
+High Standard Deviation
+Values are spread far away from mean.
+
+Example:
+Students scoring around same marks → Low SD
+Students scoring very differently → High SD
+
+Quick Revision Table
+Concept	Meaning
+Mean	Average
+Median	Middle value
+Mode	Most repeated value
+Variance	Spread of data
+Standard Deviation	Square root of variance
+Discrete	Whole numbers
+Continuous	Decimal values possible
+Nominal	Categories without order
+Ordinal	Categories with ranking
+Simple Real-Life Examples
+Situation	Type
+Number of students	Discrete
+Height	Continuous
+Blood group	Nominal
+Exam rank	Ordinal
+Average marks	Mean
+Most common mark	Mode
+
+Types of Statics: Descriptive and Inferential
+
+step by step dataset:
+1.Information
+2.Desciption
+3.Missing -> in missing we will drop irrelavent columns & if the values are missing in colums we can fill values by two types: "impute default values any number" & "can set Mean, Median values" ,Mean value to regression and median value to categorical
+4.Outlier -> there are two types of outlier: "trim which is used to drop row" & "capping which is used to assign outlier values replace the values using there two to three for example IQR"
+5.Scaling -> there are five types mostly we use first three types:
+             Standardization
+             Normalization
+             Min Max
+             Square root
+             Cube root
+6.Label Encoding
+
+Variance
+Dispersion
+Dispersion (also called variability, scatter, or spread) is the extent to which a
+distribution is stretched or squeezed. Common examples of measures of
+statistical dispersion are the variance, standard deviation, and interquartile
+range. For instance, when the variance of data in a set is large, the data is
+widely scattered. On the other hand, when the variance is small, the data is less
+scattered.
+
+Example:-
+Cricketer IPL Match
+Component life of an equipment
+Pizza Delivery
+
+Variance of Population
+
+Standard Deviation: -
+It is the square root of variance.
+
+standard deviation is a measure of the amount of variation or
+dispersion of a set of values. A low standard deviation indicates that
+the values tend to be close to the mean (also called the expected
+value) of the set, while a high standard deviation indicates that the
+values are spread out over a wider range.
+If the deviation is large, it means the numbers are
+spread out, further from the mean or average.
+
+Difference Between Sample Mean and Population Mean?
+
+Sample Variance vs. Population
+Variance: What’s the Difference?
+
+The formula to calculate population variance is:
+
+σ
+2
+= Σ (xi – μ)2
+
+/ N
+
+where:
+ Σ: A symbol that means “sum”
+ μ: Population mean
+ xi: The ith element from the population
+ N: Population size
+The formula to calculate sample variance is:
+
+s
+2
+= Σ (xi – x)2
+
+/ (n-1)
+
+where:
+ x: Sample mean
+ xi: The ith element from the sample
+ n: Sample size
+
+When we calculate population variance, we divide by N (the
+population size).
+When we calculate sample variance, we divide by n-1 (the
+sample size – 1).
+When calculating the sample variance, we apply something
+known as Bessel’s correction – which is the act of dividing
+by n-1.
+dividing by n-1corrects the bias in the estimation of the population
+variance.
+Here (n-1) is the Degrees of freedom: - refers to the
+maximum number of values, which have the freedom to
+vary, in the data sample.
+
+Missing Value:
+# how to find the missing value
+df.info() -> to check missing value
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 22 entries, 0 to 21
+Data columns (total 5 columns):
+ #   Column      Non-Null Count  Dtype
+---  ------      --------------  -----
+ 0   Dept        20 non-null     object  -> there is total no of 22 entries where 20 non-null values where there 2 missing value
+ 1   Age         20 non-null     float64 -> there is total no of 22 entries where 20 non-null values where there 2 missing value
+ 2   Experience  18 non-null     float64 -> there is total no of 22 entries where 18 non-null values where there 4 missing value
+ 3   Salary      22 non-null     int64   -> there is total no of 22 entries where 22 non-null values where there 0 missing value
+ 4   Education   20 non-null     object  -> there is total no of 22 entries where 20 non-null values where there 2 missing value
+dtypes: float64(2), int64(1), object(2)
+memory usage: 1008.0+ bytes
+
+df.describe(include="O") -> to check non-numerical data
+
+       Dept	Education
+count	20	20
+unique	4	3
+top	HR	Master
+freq	8	9
+
+df.isnull().any -> it will show true or false if it is true that is missing value row
+
+df.isnull().any() -> this will show the overall missing value is there or not with true or false
+
+df.isnull().sum() -> it will count no of missing value from the each column
+
+df.isnull().sum().sum() -> it will count overall missing value count
+
+# finding percentage of missing value in column
+df.isnull().sum()/len(df)*100 -> it will percentage missing value from the each column
+
+# both isna() and isnull() functions are used to find the missing value
+
+df1["Age"]=df1["Age"].fillna(df1["Age"].mean()) -> this will make the Age column missing value filled by that column mean value
+
+df_new1["Dept"]=df_new1["Dept"].fillna(df_new1["Dept"].mode()[0]) -> this will make the Age column missing value filled by that column median value
+
+df_new1["Dept"].value_counts() -> it will count
+
+df_new1["Experience"]=pd.to_numeric(df_new1["Experience"]) -> it will convert string to numeric
+
+df_new1["Experience"].mask((df_new1["Experience"].eq(".")),inplace=True) -> it will make replace "." value to null value
+
+df_new1["Age"]=np.where(df_new1["Age"]==0,(df_new1["Age"].mean()),df_new1["Age"]) -> it will make if condition equal to 0 will replace mean value
+
+cols=["Dept","Education"]
+df_new3[cols]=df_new3[cols].fillna(df_new3[cols].mode().iloc[0]) -> one line code to handle missing values in  many columns Mode approach
+
+sns.boxplot(data=df_new1)
+sns.boxplot(y="Experience",data=df_new1)
+sns.scatterplot(x="Experience",y="Salary",data=df_new1)
+
+
+USING IQR METHOD HANDLING OUTLIERS:
+Q1=data1.quantile(0.25)
+Q3=data1.quantile(0.75)
+IQR=Q3-Q1
+upper_limit=(Q3+1.5*IQR)
+print("Upper limit \n",upper_limit)
+lower_limit=(Q1-1.5*IQR)
+print("Lower limit \n",lower_limit)
+
+removal of outliers: Trimming process:
+df2=data1[~((data1<(lower_limit))|(data1>(upper_limit))).any(axis=1)]
+# (|)pipe function is the pipe symbol means OR either one .
+#(~)tilda function compare and remove it.
+
+Flooring / capping option - no delete - we make adjustment:
+data3["Age"]=np.where(data3["Age"]>57.750,57.750,np.where(data3["Age"]<17.750,17.750,data3["Age"]))
+data3["Experience"]=np.where(data3["Experience"]>13.875,13.875,np.where(data3["Experience"]<8.875,8.875,data3["Experience"]))
+data3["Salary"]=np.where(data3["Salary"]>59000,59000,np.where(data3["Salary"]<22000,22000,data3["Salary"]))
+
+USING Z SCORE METHOD -> it will make high benchmark then IQR Method
+data4=df_new1.copy()
+up_limit=data4.median()+3*data4.std() -> making 3 standard deviation
+low_limit=data4.median()-3*data4.std() -> making 3 standard deviation
+print("Upper limit \n",up_limit)
+print("Lower limit \n",low_limit)
+
+better to use IQR Method
+
+normal distribution -> where the center point will be mean or median value
+Standard normal distribution -> where the center point will be 0 value -> Z = observed value - mean / standard deviation
+
+Confidence level increase confidence interval increase
+
+#Pandas DataFrames
+import pandas as pd
+import numpy as np
+import scipy.stats as st
+
+data=np.array([6,7,7,12,13,13,15,16,19,22])
+st.zscore(data)
+
+cardio=pd.read_csv("Cardio_vascular.csv")
+cardio.head()
+
+cardio1=cardio.copy()
+cardio2=st.zscore(cardio1)
+
+st.norm.interval(alpha=0.95,loc=np.mean(cardio["chol"]),scale=st.sem(cardio["chol"])) -> this will calculate the confidence level "sem" will take the margin of error, "loc" mean or median value and "scale" will be standard deviation 
+Confidence level formula is CI = Mean + or - Margin of errors
+
+using t score calculating the CI:
+data5=[12,12,13,13,15,16,17,22,23,25,26,27,28,28,29]
+st.t.interval(alpha=0.95,df=len(data5)-1,loc=np.mean(data5),scale=st.sem(data5))
+
+if the dataset size is > 30 use Z score else use t score
+
+Probability Sampling Methods:
+Type of Probability Sampling Methods: 
+1. Simple random sampling -> randomly taking sample data
+2. Systematic random sample -> is similar to simple random sampling, but instead of randomly generating numbers, individuals are chosen at regular intervals. ex: If 10th person on the
+list is selected (6, 16, 26, 36, and so on)
+3. Stratified random sample -> Split a population into groups. Randomly select some members from each group to be in the sample. it will equality in sample data
+4. Cluster sampling -> Cluster sampling also involves dividing the populationinto subgroups, but each subgroup should have similar characteristics to the whole sample. Instead of sampling
+individuals from each subgroup, you randomly select entire subgroups.
+
+Difference between stratified sampling and cluster sampling:
+ In cluster sampling it is not mandatory to select from all the sub groups. We can select from our choice either from 2 group of from more or all groups.
+ In stratified sampling it is mandatory toselect from all the sub-groups.
+
+population and sampling:
+import pandas as pd 
+school={'ID':[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],'NAME':["Mayank","Anu","Geeta","Ramesh","Prakash","Swati","Sweta",'Ravi','Raju',"Archana","Madhuri","Irfan","Sabina",'Alex','Rohan','Kiran','Jack',"Anjali","Alok","Preeti"],
+         'MATH':[70,55,70,89,90,76,44,50,70,88,60,70,80,77,78,59,77,98,99,99],
+         'ENGLISH':[71,90,70,55,60,70,78,98,67,87,78,79,45,76,33,76,79,78,78,99],'COMPUTER':[98,90,76,55,65,70,88,98,67,84,90,99,45,88,83,76,99,78,77,97],'AWARD':[0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1]}
+df = pd.DataFrame(data=school)
+
+df.set_index("ID",inplace=True) -> setting ID column as index
+
+sample1=df.sample()
+
+df.sample(
+    n=None,
+    frac:  None,
+    replace: False,
+    weights=None,
+    random_state=None,
+    axis:False,
+)
+
+# n is the no. of sample
+#frac= fraction 10%   frac=0.1
+#replace- replacement allowed , repetation allowed
+#weight:-by default each observation is equally weighted. 
+#we can assign weighted to individual observation.
+#random_state:-reproduce the same sample
+
+sample2=df.sample(frac=0.1) -> frac is take this percentage of data from the sample
+sample3=df.sample(n=5) -> n is the no of sample
+sample3=df.sample(n=5,random_state=1) -> random_state Ensures others can get the same sample when running your code
+sample6=df.sample(n=5,random_state=105,replace=True) -> replace is used to maintain the unique sample data use false to unique sample
+
+weight to a particular class :
+df2["weights"]=df2["AWARD"].map({0:10,1:80}) -> it will be used in inbalance dataset
+sample5=df2.sample(n=5,weights="weights")
+
+splitting into dependent and independent variable:
+X=df.drop(["AWARD"],axis=1) -> X is indepent variable
+Y=df["AWARD"] -> Y is depent variable
+
+print(X) -> (20, 4)
+print(Y) -> (20,)
+
+splitting the data in training and testing 
+from sklearn.model_selection import train_test_split -> import this for split training and test dataset
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.20) -> make 20% to test data and remaing 80% to training data
+print(X_train.shape) -> (16,4)
+print(Y_train.shape) -> (16,)
+print(X_test.shape) -> (4,4)
+print(Y_test.shape) -> (4,)
+
+cardio_cascular dataset central limit theorem:
+Central limit theorem
+The Central Limit Theorem (CLT) is a statistical theory that indicate that the mean and standard deviation derived from a sample, will accurately approximate the mean and standard deviation of the population. 
+The minimum number of members in the sample is 30 or more than 30. 
+is 30
+
+cardio1=pd.read_csv("Cardio_vascular.csv")
+cardio2=cardio1["chol"]
+cardio2.head() ->
+0    212
+1    203
+2    174
+3    203
+4    294
+Name: chol, dtype: int64
+
+population mean and SD:
+cardio2.mean() -> 246.0
+cardio2.std() -> 51.59251020618206
+
+taking samples:
+sample1=cardio2.sample(n=30,random_state=1)
+sample2=cardio2.sample(n=50,random_state=2)
+sample3=cardio2.sample(n=100,random_state=3)
+sample4=cardio2.sample(n=150,random_state=4)
+sample5=cardio2.sample(n=200,random_state=5)
+sample6=cardio2.sample(n=300,random_state=6)
+
+sample1.mean() -> 251.6
+sample3.mean() -> 241.38
+sample6.mean() -> 251.553333333333334
+
+law of large number:
+(1)sample size = or more than 30.
+(2)Higher the sample size , lower the error .
+If the sample size is large enough more than 30 , the sample distribution taken from any population distribution regradless of its shape will approximately a normal distribution.
+law of large number.
+The sample size increases the meqan of the sample is close to the mean of the population.
+no. of element in the sample >=30
+
+Probability Distribution:
+Type of distribution:
+dataset can consist of two types of data elements:
+Numerical(integers, float, etc): This type of data can 
+further be categorized into two types:
+
+Discrete: This type of numerical data can be only a certain value like the number of apples in the basket and number of people in a team, etc.
+
+Continuous: This type of numerical data can be real or fractional values, for example, the height of the tree, the width of the tree, etc.
+
+Categorical (names, labels, etc): It can be the categories such as gender, state, etc.
+
+There are different types of probability distribution for machine learning projects. 
+This is important because certain ML models assume specific probability distribution of the underlying data to work efficiently so this knowledge will help us to choose the right model. Also, the knowledge of probability distribution will help to understand the characteristics of data during the exploratory data analysis (EDA) phase.
+
+probability mass function:
+Using the discrete random variables from the dataset 
+we can calculate the probability mass function PMF
+
+probability density function PDF:
+using the continuous random variable we can calculate the probability density function PDF.  
+
+Probability density function:also call it continuous probability distribution.
+
+Normal (Gaussian) Distribution:
+The Normal Distribution is one of the most important distributions.
+
+Most of the real-world scenarios can be represented with Normal 
+Probability Distribution.
+
+The normal distribution can be mathematically represented as, where µ is mean and σ is the standard deviation.
+
+It fits the probability distribution of many events, eg. IQ Scores, Heartbeat etc.
+
+from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.distplot(random.normal(size=1000), hist=False)
+
+plt.show()
+
+probability mass function:
+Using the discrete random variables from the dataset 
+we can calculate the probability mass function PMF
+
+Bernoulli Distribution:
+A Bernoulli Distribution denotes the random probability of an event that only has two possible discrete outcomes like 0 and 1. 
+The tossing of a coin is a Bernoulli event since it has only two possible discrete outcomes – Head (i.e. 1) and Tail (i.e. 0). 
+Hence it follows the Bernoulli probability distribution.
+
+from scipy.stats import bernoulli
+import seaborn as sns
+data_bern = bernoulli.rvs(size=10000,p=0.6)
+
+ax= sns.distplot(data_bern,
+                 kde=False,
+                 color="skyblue",
+                 hist_kws={"linewidth": 15,'alpha':1})
+ax.set(xlabel='Bernoulli Distribution', ylabel='Frequency')
+
+Binomial Distribution:
+The binomial distribution is the sum of independent Bernoulli events that have just two outcomes like 0 or 1 repeated multiple times.
+tossing of a coin is a Bernoulli event.
+Now if we keep on repeating the tossing of the coin it will assume the Binomial probability distribution.
+Binomial Distribution is a Discrete Distribution.
+It describes the outcome of binary scenarios, e.g. toss of a coin, it will either be head or tails.
+
+It has three parameters:
+n - number of trials.
+p - probability of occurence of each trial (e.g. for toss of a coin 0.5 each).
+size - The shape of the returned array.
+
+Discrete Distribution:The distribution is defined at separate set of events, e.g. a coin toss's result is discrete as it can be only head or tails whereas height of people is continuous as it can be 170, 170.1, 170.11 and so on.
+
+Example:-Given 10 trials for coin toss generate 10 data points:
+from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.distplot(random.binomial(n=10, p=0.5, size=500), hist=True, kde=False)
+
+plt.show()
+
+from scipy.stats import binom
+binom.pmf(6,10,0.5) -> k exactly , n total,p probability of success, coin tossed 10 times probability of getting exactly 6 head.
+
+dice tossed 10 times probability of getting exactly 6 time  1 number.
+binom.pmf(6,10,1/6)
+
+binom.cdf(k,n,p)# k less than or equal to , n total,p probability of success coin tossed 10 times probability of getting less than or equal to  6 head.
+binom.cdf(6,10,0.5)
+
+Ramesh flips a fair coin 20 times. What is the probability that the coin lands on heads 5 times or fewer?
+binom.cdf(5,20,0.5)
+
+Ramesh flips a fair coin 5 times. What is the probability that the coin lands on heads 2 times or fewer?
+binom.cdf(2,5,0.5)
+
+It is known that 80% of individuals support a Traffic Rules. 
+If 10 individuals are randomly selected, what is the probability that between 4 and 6 of them support the Traffic Rules?
+calculate binomial probability
+binom.cdf(k=6, n=10, p=0.8) - binom.cdf(k=3, n=10, p=0.8)
+
+Poisson Distribution:
+The Poisson distribution, named after the French mathematician Denis Simon Poisson, is a discrete distribution function.
+It describe the probability that an event will occur a certain number of times in a fixed time (or space) interval.
+It is used to model count-based data, like the number of emails arriving in your mailbox in one hour or the number of customers walking into a shop in one day, for instance.
+Poisson Distribution is a Discrete Distribution.
+
+It has two parameters:
+lam - rate or known number of occurences .
+size - The shape of the returned array.
+
+Visualization of Poisson Distribution:
+from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.distplot(random.poisson(lam=2, size=1000), kde=False)
+plt.show()
+
+Example 1: Probability Equal to Some Value
+A store sells 3 apples per day on average. What is the probability that they will sell 5 apples on a given day? 
+from scipy.stats import poisson
+#calculate probability
+poisson.pmf(k=5, mu=3)
+
+A pizza counter 50 customer per hour on average. What is the probability that 100  customer on a given hour?
+poisson.pmf(k=100, mu=50)
+
+Example 2: It is known that a certain website makes 10 sales per hour. In a given hour, what is the probability that the site makes exactly 8 sales?
+Answer: Using the Poisson Distribution Calculator with λ = 10 and x = 8, we find that P(X=8) 
+poisson.pmf(k=8, mu=10)
+
+Example 3: Probability Less than Some Value
+A certain store sells 7 footballs per day on average. What is the probability that this store sells 4 or less footballs in a given day?
+poisson.cdf(k=4, mu=7)
+
+Example 4: It is known that a certain hospital experience 4 births per hour. In a given hour, what is the probability that 4 or less births occur?
+Answer: Using the Poisson Distribution Calculator with λ = 4 and x = 4, we find that P(X≤4) .
+poisson.cdf(k=4, mu=4)
+
+Example 5: Probability Greater than Some Value
+A certain store sells 15 Mobile Phone per day on average. 
+What is the probability that this store sells more than 20 Mobile Phone in a given day?
+1-poisson.cdf(k=20, mu=15)
+
+Example 6: It is known that a certain Property dealer makes an average of 5 house sales per month. In a given month, what is the probability that he makes more than 7 house sales?
+Answer: Using the Poisson Distribution Calculator with λ = 5 and x = 7, we find that P(X>7).
+1-poisson.cdf(k=7, mu=5)
+
+Difference Between Normal and Poisson Distribution:
+Normal distribution is continous whereas poisson is discrete.
+But we can see that similar to binomial for a large enough poisson distribution it will become similar to normal distribution with certain std dev and mean.
+
+from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.distplot(random.normal(loc=50, scale=7, size=1000), hist=False, label='normal')
+sns.distplot(random.poisson(lam=50, size=1000), hist=False, label='poisson')
+plt.show()
+
+Difference Between Poisson and Binomial Distribution:
+The difference is very subtle it is that, binomial distribution is for discrete trials, whereas poisson distribution is for continuous trials.
+But for very large n and near-zero p binomial distribution is near identical to poisson distribution such that n * p is nearly equal to lam.
+
+from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.distplot(random.binomial(n=1000, p=0.01, size=1000), hist=False, label='binomial')
+sns.distplot(random.poisson(lam=10, size=1000), hist=False, label='poisson')
+plt.show()
+
+Permutation & Combination and PROBABILITY
+Permutation and combination:
+ When the order does matter it is permutation
+ When the order doesn’t matter it is combination
+
+Permutation
+(1) Repetition is allowed: - secret lock no. can be 333
+(2) Repetition Not allowed: - out of 5 employees A,B,C,D,E you have to choose 3 for a training program. You can’t choose A, A and C.
+
+(1)Permutation with repetition: -
+When a thing has n different types , choosing r something from n
+different types ..
+Total possible permutation are
+n x n x n x n....r times = n power r
+
+exp:- In the lock there are 10 numbers to choose from 0,1,2,...9 and if
+we choose 3 from them .
+no. of permutation = 10 power 3= 1000 no. of permutation can be
+possible.
+When repetition allowed
+Permutation = n power r.
+
+(2)Permutation without Repetition:-
+Example: -
+What order could 10 pool balls ca be chosen.
+Condition: - Repetition not allowed, means if no. 8 chosen , we can’t choose it again.
+First choice has 10 possibilities
+Second chose has 9
+Third has 8.... And so on.....
+Total possibilities= 10x9x8x7x....1=3,62,8,800.
+But assume we just want to choose 3 balls
+Than possibilities=10x9x8=720
+
+Restricted Combination: -
+(1)No. of ways of selecting r things out of n different things.
+ncr= n!/r!(n-r)!
+(2)No. of ways of selecting r things out of n different things . When
+p particular things are always be selected.
+(n-p)c(r-p)
+Example:- out of 30 players we have to select 11.
+(a)wicket keeper must be selected.
+Hint:- Here p=1,n=30,r=11
+In fact, we are selecting 10 players out of 29 players
+(b) wicket keeper & captain must be selected.
+Hint:-Here p=2,n=30,r=11
+(3)Out of 100 students , we need to select 10 students, but 2 students
+are highly notorious , they must be rejected from the selection.
+Here p=2
+Here finally we have to use only 98 no. of students .
+
+(4)Number of selection of r things from n different things , when p
+particular things are not together in any selection :-
+For example:- In an organization some husbands wives are working
+together. In any committee the Husband & wife both should not be
+there.
+
+ncr - (n-p)c(r-p)
+
+Q . In an organization ABC there are 100 employees, A investigation committee of member 10 is required for form. There are 4 couples (husband and wives) in the company, the condition is both husband and wife should not be in the investigation committee. Find the no. of possibilities of selection?
+100c10 -(100-4)c(4-4)
+
+There are 5 professors, 4 Doctors, 3 Teachers, 2 Bankers.
+Make a 5-member committee: -
+There must be 1 professor, 1 teacher, 2 Banker, 1 Doctor.
+How many different committee, we can make?
+5c1 * 4c1 * 3c1 * 2c2 
+
+PROBABILITY
+Randomness
+Random: -True Random means no prediction Power. We can’t predict if it is true Random.
+
+Randomness:
+(1) Deterministic
+(2) Non Deterministic
+
+Non Deterministic:
+(1)Random Stochastic Phenomenon 
+Unable to predict the outcome but in long run (large no. of
+trial) the outcome exhibits statically regularity.
+(2)Haphazard Random Phenomenon
+Unpredictable outcome. but even in long run (large no. of trial
+or experiments) the still the outcome exhibit statically
+irregular.
+Probability & Inference: - are used everywhere.
+Inference  A conclusion reached on the basis of evidence &
+Reasoning.
+
+Probability and Likelihood: -
+ Probability refers to the chance that a particular outcome
+occurs based on the values of parameters in a model.
+ Likelihood refers to how well a sample provides support
+for particular values of a parameter in a model.
+ The term Likelihood refers to the process of determining
+the best data distribution given a specific situation in the
+data.
+ When calculating the probability of a given outcome, you
+assume the model's parameters are reliable.
+ Probability is used to finding the chance of occurrence of
+a particular situation,
+ whereas Likelihood is used to generally maximizing the
+chances of a particular situation to occur.
+
+P(H)=1/2 # probability of getting head when toss a coin.
+P(T)= 1/2 # probability of getting head when toss a coin.
+# what is the probability of getting 2 heads when we toss two
+coins together?
+
+1/2 + 1/2 -> independent -> toss one coin it will be either head or tail
+1/2 * 1/2 -> dependent -> toss two coins at a time it will be dependent
+
+EVENTS
+(1) Dependent Events or conditional
+(2) Independent Events.
+Dependent Event: - A card is chosen out of 52 cards (no replacement after drawn).
+4/52  probability first card is Queen.
+4/51 Probability next card is Jack.
+P(Queen and Jack) 4/52 x 4/51=16/2652=4/663.
+P(Queen OR Jack)4/52 + 4/51.
+
+Independent Event: - A card is chosen out of 52 cards (replacement done after drawn).
+4/52  probability first card is Queen.
+4/52 Probability next card is Jack.
+P(Queen and Jack) 4/52 x 4/52.
+P(Queen OR Jack)4/52 + 4/52.
+
+Union and Intersection:
+Union:
+The union of two EVENTS that contains all of the elements that are in at least
+one of the two sets. The union is written as A∪B it is “A or B”.
+AUB occurs if the event A occurs or the Event B occurs.
+
+Intersection:
+The intersection of two sets is a new set that contains all of the elements that are
+in both sets. The intersection is written as A∩B it is “A and B”.
+A∩B occurs means Event A and Event B both occurs.
+
+P(A B)=P(A)+P(B)-P(A∩B)
+P (A∩B)= P(A)+P(B)- P(A B)
+
+Mutually exclusive
+Two events A & B are called mutually exclusive if
+A∩B = Ø null event Event A and B can’t occur together
+Exp:- flipping a coin , Head and Tail can’t occurs together
+P (A B)= P(A)+P(B)
+
+Compliment :-
+Compliment of A Probability(Not A)=1-P(A)
+
+Q. In a class of 250 students, 150 like orange Juice, 90 like Apple Juice, 60 like both Juice.
+(a)How many students like either orange or Apple Juice?
+(b)How many don’t like any juice?
+
+Conditional probability or dependent probability: -
+If we are told that event B has occurred, what is the probability that Event A will also occur.?
+P(A/B) Probability of A , when B already occurred.
+P(A/B) = P(A∩B)/P[B]
+
+Q. If P(A)=7/13, P(B)=9/13, P(A∩B)=4/13.
+What is P(A/B)?
+P(A/B)Probability of A when B has already occurred.
+Ans:-P(A/B)=P(A∩B)/P(B)= (4/13)/(9/13)=4/9.
+
+Q.A family has two children , what is thenprobability that both the children are boys. Given that at least one of them is a boy.
+Ans:- Recall the Formula
+P(A/B) Probability of A , when B already occurred.
+P(A/B) = P(A∩B)/P[B]
+
+E both the children are boy.
+Fat least one of them is a boy.
+Sample space={bb,bg,gb,gg}
+P(E)=1/4
+P(F)=3/4
+(E∩F)={bb}
+P(E∩F)=1/4
+P(E/F) probability that both children are boy , given that
+one child is boy.
+P(E/F)= P(E∩F)/P(F)=(1/4)/3/4)=1/3.
+
+Q. In a school there are 1000 students, out of which 430 are girls, it is known that out of 430 girls 10% girls are studying in class 12 . A student chosen randomly from the school, what is the probability that chosen one is a student of class 12?.
+It is given that the chosen student is a girl.
+Ans:- Recall the Formula
+P(A/B) Probability of A , when B already occurred.
+P(A/B) = P(A∩B)/P[B]
+
+Bayes Theorem
+Named after Thomas Bayes.
+Describes the probability of an event based on the prior knowledge of conditions that might be related to the event. The conditional Probability is known as hypothesis. The Hypothesis is calculated through previous evidence or knowledge.
+
+Deriving Bayes Equation:-
+
+P(B|A) = P(A ∩ B) / P(A)
+P(A|B) = P(A ∩ B) / P(B)
+P(A ∩ B) = P(B|A) × P(A)
+P(A ∩ B) = P(A|B) × P(B)
+
+Solving above two equations we get Bayes Theorem. Besides statistics, the Bayes’ theorem is also used in various disciplines, with medicine and pharmacology as the most notable examples. In addition, the theorem is commonly employed in different fields of finance. Some of theapplications include but are not limited to, modeling the risk of lending money to borrowers or forecasting the probability of the success of an investment.
+
+These type of computations are actually used for SPAM Filters. we need to know a conditional probability.
+For Example,
+The probability that the word MONEY word appears in an email, given that the email is spam is 8%.
+Probability that an email can be a spam =20%
+Probability that Money can appear in an email=2.4%
+MEvent of Money, S Even of SPAM
+P(Money/Spam)=0.08, P(Spam)=0.2 , P(Money)=0.024
+But We are interested to know the probability that the email is spam, given that Money appears in the email.
+P(Spam/Money)=?
+P(Spam/Money)=P(Money/Spam)x P(Spam)/P(Money)
+                               =0.08x0.2/0.024=0.67=67%.
+
+MATRICES
+Matrices are a foundational element of linear algebra.
+
+Linear Algebra is an essential field of mathematics, which defines the study of vectors, matrices, planes, mapping, and lines required for linear transformation.
+
+Matrices are used throughout the field of machine learning such as processes the input data variable (X).
+Applying the algorithm, training a Model.
+Simple methods of solving system of linear equations.
+
+Matrix simple expression
+example 1 :-
+Radha has 15 notebooks.
+We can express it as [15] with the understanding that the number inside [ ] is the number of notebooks that Radha has.
+
+Example 2
+Radha has 15 notebooks and 6 pens.
+We can express it as [15 6] with the understanding that first number inside [ ] is the number of notebooks while the other is the number of pens.
+
+Example 3
+Let us now suppose that we wish to express the information of possession of notebooks and pens by Radha and her two friends Fauzia and Simran which is as follows:
+Radha has 15 notebooks and 6 pens,
+Fauzia has 10 notebooks and 2 pens,
+Simran has 13 notebooks and 5 pens.
+
+Now this could be arranged in the tabular form as follows:
+An arrangement as above kind is called a matrix.
+It is a 3x2 matrix it has 3 rows and 2 columns.
+It is a 2x3 matrix it has 2 rows and 3 columns.
+
+In general, an m × n matrix has the following rectangular array:
+m -> is row
+n -> is column
+
+Properties:
+ A specified number of rows and a specified number of columns
+ Two numbers (rows x columns) describe the dimensions or size of the matrix.
+TYPES OF MATRICES
+1.Column matrix: Any no. of rows but the number of columns is only 1.-->(1xn) matrix
+
+2.Row matrix Any number of columns but only one row. (nx1)matrix
+
+3.Rectangular matrix number of rows is not equal to the number of columns.-->(m x n) matrix)
+
+4.Square matrix The number of rows is equal to the number of columns .-->(m x m) matrix
+
+5.Diagonal matrix A square matrix where all the elements are zero except those on the main diagonal
+
+6.Unit or Identity matrix - I A diagonal matrix with ones on the main diagonal
+
+7.Null (zero) matrix - 0 All elements in the matrix are zero
+
+8.Triangular matrix A square matrix whose elements above or below the main diagonal are all zero
+
+8a. Upper triangular matrix
+
+8b. Lower triangular matrix
+
+Splitting the square Matrix into two triangles is one example of matrix decomposition is also called matrix factorization.
+
+Examples of imp Matrix Decomposition in ML
+
+LU Decomposition- Lower Upper decomposition.
+
+Factorization of a given square matrix into two triangular matrices, one upper triangular matrix and one lower triangular matrix, such that the product of these two matrices gives the original matrix.
+
+Eigen Decomposition that decomposes a square matrix into eigen vectors and eigenvalues. This decomposition also plays a role in methods used in ML, such as in the Principal Component Analysis method or PCA A vector is an eigenvector of a matrix if it satisfies the following equation.
+A.v= ƛ v
+where ƛ is the eigen value and v is the eigen vector
+
+Singular Value Decomposition (SVD)
+A popular application of SVD is for dimensionality reduction. Data with a large number of features, such as more features (columns) than observations (rows) may be reduced to a smaller subset of features that are most relevant to the prediction problem.
+
+Be it within the same column (variance), between columns (covariance)
+Covariance:
+Covariance is a measure which shows the extent to which two random variables columns change w.r.t each other..
+cov=df.cov()
+cov
+
+Visualizing the relationships between columns Before you do any cleanup, it would be useful to visualizing the relationships between the various columns using a pair plot (using the Seaborn module):
+
+Seaborn Pairplot uses to get the relation between each and every  variable present in Pandas DataFrame. It works like a seaborn scatter plot but it plot only two variables plot and sns pairplot plot the pairwise plot of multiple features/variable in a grid format. 
+
+import seaborn as sns
+sns.pairplot(df)
+
+sns.scatterplot(x="Age",y="BP",data=df)
+
+Calculating Correlation:
+Correlation is a bivariate analysis that measures the strength of association between two variables and the direction of the relationship.  In terms of the strength of relationship, the value of the correlation coefficient varies between +1 and -1.
+A value of ± 1 indicates a perfect degree of association between the two variables.
+
+calculate the correlation STRENGTH between the columns using the corr() function:
+
+Pearson correlation:
+For the Pearson r correlation, both variables should be normally distributed (normally distributed variables have a bell-shaped curve).  Other assumptions include linearity and homoscedasticity.  Linearity assumes a straight line relationship between each of the two variables and homoscedasticity assumes that data is equally distributed about the regression line.
+
+corr=df.corr()# by default method is Pearson
+corr
+
+sns.heatmap(corr,annot=True) ->annot shows values in heatmap
+
+Spearman rank correlation:
+Spearman rank correlation: Spearman rank correlation is a non-parametric test that is used to measure the degree of association between two variables.  
+The Spearman rank correlation test does not carry any assumptions about the distribution of the data and is the appropriate correlation analysis when the variables are measured on a scale at least ordenal
+
+Types of research questions a Spearman Correlation can examine:
+Is there a statistically significant relationship between participants’ level of education (high school, bachelor’s, or graduate degree) and their starting salary?
+Is there a statistically significant relationship between horse’s finishing position a race and horse’s age?
+
+Assumptions: 
+The assumptions of the Spearman correlation are that data must be at least ordinal and the scores on one variable must be monotonically related to the other variable.
+
+corr1=df.corr(method="spearman")
+corr1
+
+Kendall rank correlation:
+The Kendall rank correlation coefficient does not assume a normal distribution of the variables and is looking for a monotonic relationship between two variables.
+Kendall rank correlation: Kendall rank correlation is a non-parametric test that measures the strength of dependence between two variables.
+Two variables are monotonic correlated if any greater value of the one variable will result in a greater value of the other variable. 
+If the variables is negatively monotonic correlated, then it is opposite.
+
+corr2=df.corr(method="kendall")
+corr2
+
+1.difference between spearman and kendall m
+2.marks in physics and rank in university.
+3.data is not normally distributed
+4.SAMPLE SIZE IS SMALL THAN USE spearman
+
+Point-biserial correlation:
+strength of the relationship between two variables.
+Your variables of interest should include one continuous and one binary variable.
+Height vs Gender
+Test reading vs Disease 
+
+it is like one column having continous values and another column has category
+
+Similar to the Pearson correlation coefficient, the point-biserial correlation coefficient takes on a value between -1 and 1 where:
+-1 indicates a perfectly negative correlation between two variables
+0 indicates no correlation between two variables
+1 indicates a perfectly positive correlation between two variables
+
+y = [1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0]
+x = [12, 14, 17, 17, 11, 22, 23, 11, 19, 8, 12]
+
+import scipy.stats as stats
+stats.pointbiserialr(x,y)
+
+output: PointbiserialrResult(correlation=-0.6115729628358616, pvalue=0.04556468632900194) ->pvalue is the percentage of error
+
+variance_inflation_factor:
+It is used to find before correlation we can check column more correlation
+As VIF does not tell which pair of independent variables are correlated, you can run a correlation analysis to know which variables are highly correlated.
+"VIF work on numerical value columns only if it is string convert to numerical and encode the data" 
+
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+import statsmodels.api as sm
+
+splitting the data in dependent and independent variable:
+X=df.drop("BP",axis=1)
+Y=df["BP"]
+
+vif=pd.DataFrame()
+vif["Variable"]=X.columns
+vif["VIF"]=[variance_inflation_factor(X.values,i) ->X is always want to be array
+           for i in range(X.shape[1])]
+vif
+
+output:Variable	VIF
+0	Age	536.793041
+1	Weight	3187.057943
+2	Stress	5.809743
+3	BSA	1044.246904
+4	Dur	12.514432
+5	Pulse	1553.320340
+
+X1=df.drop("BP",axis=1)
+Y1=df["BP"]
+X1=sm.add_constant(X1) ->make constant
+
+vif=pd.DataFrame()
+vif["Variable"]=X1.columns
+vif["VIF"]=[variance_inflation_factor(X1.values,i)
+           for i in range(X1.shape[1])]
+
+Feature scaling:
+Standardization can drastically improve the performance of models.
+For instance, many elements used in the objective function of a learning algorithm (such as the RBF kernel of Support Vector Machines or the l1 and l2 regularizers of linear models) assume that all features are centered around zero and have variance in the same order. If a feature has a variance that is orders of magnitude larger than others, it might dominate the objective function and make the estimator unable to learn from other features correctly as expected.
+
+Depending on your needs and data, sklearn provides a bunch of scalers: StandardScaler, MinMaxScaler, MaxAbsScaler and RobustScaler.
+
+we whitly use  StandardScaler, MinMaxScaler
+MinMaxScaler is mostly used in image preprocessing
+
+(1)NORMALIZATION:- APPLY WHEN DATA DOES NOT FOLLOW GAUSSION DISTRIBUTION, IT IS MIN MAX APPROACH. LIKE K NEAREST NEIGHBORS.(KNN), IMPACT OF OUTLIER IS HIGH.
+(2)STANDARIZATION:- DATA FOLLOWS GAUSSION DISTRIBUTION.
+  PCA PREFER STANDARIZARION.IMPACT OF OUTLIER IS LOW.
+
+X=df.drop("BP",axis=1) ->Before Scaling drop the dependent variable column
+Y=df["BP"] 
+
+Standard Scaler:
+from sklearn.preprocessing import StandardScaler
+scaler=StandardScaler()
+X_scaled1=scaler.fit_transform(X)
+X_scaled1
+
+SCALING USING STANDARD SCALER:
+X_scaled1_df=pd.DataFrame(X_scaled1,columns=X.columns) -> we are coverting array to dataframe
+X_scaled1_df
+
+Standard Scaler :-
+Sklearn its main scaler, the StandardScaler, uses a strict definition of standardization to standardize data. It purely centers the data by using the following formula, where u is the mean and s is the standard deviation.
+x_scaled = (x — u) / s
+
+MinMax Scaler:
+The MinMaxScaler transforms features by scaling each feature to a given range. This range can be set by specifying the feature_range parameter (default at (0,1)). This scaler works better for cases where the distribution is not Gaussian or the standard deviation is very small. 
+However, it is sensitive to outliers, so if there are outliers in the data, you might want to consider another scaler.
+
+x_scaled = (x-min(x)) / (max(x)–min(x))
+
+Importing and using the MinMaxScaler works — 
+just as all the following scalers — in exactly the same way as the 
+StandardScaler. The only difference sits in the parameters on initiation of a new instance.
+
+from sklearn.preprocessing import MinMaxScaler
+#sclaer1=MinMaxScaler()
+sclaer1=MinMaxScaler(feature_range=(-3,3))# we are fixing the scaling range -3 to 3
+X_scaled2=sclaer1.fit_transform(X)
+X_scaled2
+
+SCALING USING MIN MAX SCALER:
+X_scaled2_df=pd.DataFrame(X_scaled2,columns=X.columns)
+X_scaled2_df
+
+MaxAbs Scaler:
+The MaxAbsScaler works very similarly to the MinMaxScaler but automatically scales the data to a [-1,1] range based on the absolute maximum. This scaler is meant for data that is already centered at zero or sparse data. It does not shift/center the data, and thus does not destroy any sparsity.
+
+x_scaled = x / max(abs(x))
+
+#abs (x) function returns the absolute value of the argument x 
+that can be an integer, float, or object implementing the __abs__ () function. 
+For a complex number, the function returns its magnitude. The absolute value of any numerical input argument -x or +x is the corresponding positive value +x.
+
+from sklearn.preprocessing import MaxAbsScaler
+
+sclaer2=MaxAbsScaler()
+X_scaled3=sclaer2.fit_transform(X)
+X_scaled3
+
+SPARSE DATA:
+Missing data in machine learning is a type of data that contains null values, whereas Sparse data is a type of data that does not contain the actual values of features; it is a dataset containing a high amount of zero or null values. 
+It is a different thing than missing data.
+
+Sparse datasets with high zero values can cause problems like over-fitting in the machine learning models and several other problems. 
+That is why dealing with sparse data is one of the most hectic processes in machine learning.
+
+1. Sparse data is completely different from missing data. 
+It is a form of data that contains a high amount of zero values.
+
+2. The sparse data should be handled properly to avoid problems like time and space complexity, lower performance of the models, over-fitting, etc.
+
+3. Dimensionality reduction, converting the sparse features into dense features and using algorithms like entropy-weighted k means, which are robust to sparsity, can be the solution while dealing with sparse datasets.
+
+Robust Scaler:
+If your data contains many outliers, scaling using the mean and standard deviation of the data is likely to not work very well. In these cases, you can use the RobustScaler. It removes the median and scales the data according to the quantile range. 
+By default, the scaler uses the Inter Quartile Range (IQR), which is the range between the 1st quartile and the 3rd quartile. 
+The quantile range can be manually set by specifying the quantile_range parameter when initiating a new instance of the RobustScaler. 
+For example , we transform feature scaling using an quantile range from 10% till 90%.
+
+from sklearn.preprocessing import RobustScaler
+
+robust=RobustScaler(quantile_range=(0.2,0.8))
+X_scaled4=robust.fit_transform(X)
+X_scaled4
+
+scaling approach on Targeted column:
+from sklearn.preprocessing import StandardScaler
+scaler5=StandardScaler()
+cols=["Age","Weight","Pulse"]
+df1[cols]=scaler5.fit_transform(df1[cols])
+
+Categorical features:
+import numpy as np
+import pandas as pd
+df=pd.read_csv("label_encoding2.csv")
+
+"Often in machine learning, we want to convert categorical variables into some type of numeric format that can be readily used by algorithms.
+There are two common ways to convert categorical variables into numeric variables:
+    1. Label Encoding: Assign each categorical value an integer value based on alphabetical order.
+
+    2. One Hot Encoding: Create new variables that take on values 0 and 1 to represent the original categorical values.
+
+df1=df.copy()
+.astype("category").cat.codes ->function will change the categorical variable to numerical
+
+applying the .astype("category").cat.codes   function on Education column:
+df1.Education=df1.Education.astype("category").cat.codes
+df1.head()
+
+after apply the .astype("category").cat.codes function... 
+#we found the values has been assigned as per alphabet 0,1,2,3....20 as per requirement.
+# as value 20 is much higher than 0, to avoid this problem another solution is as below:
+
+we can do apply the .get_dummies function all value will be assign 0 and 1 only:
+df2=pd.get_dummies(df2,columns=["Dept","Education"])
+
+to avoide the Multi collinearity we should drop any one of the column ,which is not givng any new information for further training
+
+correct label encoding means high education must assign high value like PHd should have 3 , Master 2 Graduate 1 Under graduate should have 0 we can do it by using Map and Dict creation.
+
+correct way of ordinal encoding:
+df5["Education"]=df5["Education"].map({"Master":2,"Graduate":1,"Under_Graduate":0})
+df5.head()
+
+Imporntant:-
+Linear Regression:
+Problem statement: To find the effect of different type of Advertisement on Sales  
+# import the basic library
+import os
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
+
+import warnings
+warnings.filterwarnings("ignore")
+
+df=pd.read_csv("Advertising.csv") ->reading dataset
+df1.info() ->to find the information of dataset
+
+To check the normal distribution status of data.:
+df1.skew()
+df1.kurtosis() 
+->skewness and kurtosis range -3 to +3 , it as APPROXIMATELY normally distributed.
+
+create cbrt-transformed data:
+df1 = np.cbrt(df1) _> it used for normal distribution
+
+DATA PROCESSING STEP:
+1)MISSING DATA:
+calculate the percentage of missing value 
+df1.isnull().sum()/len(df1)*100
+df1.isnull().sum()
+df.dropna(inplace=True)  ->will drop all rows with NaN in any column, but this approach is not good.
+
+handling missing value :- mean, mode, median approach:
+df1["TV"]=df1["TV"].fillna(df1["TV"].median()) ->Median approach because it has outliers
+df1["Radio"]=df1["Radio"].fillna(df1["Radio"].mean()) ->Mean approach
+we use Mode for classification 
+
+looking for outliers:
+sns.boxplot(y="TV", data=df1) ->in the graph show dots it is outliers
+
+Handling outliers:
+FINDING IQR, Upper limit, Lower Limit:
+here it is necessary to apply it on targeted colums , we will use numpy .
+Q1_TV=df1["TV"].quantile(0.25)
+print
+Q3_TV=df1["TV"].quantile(0.75)
+IQR_TV=Q3_TV-Q1_TV
+upper_limit_TV=(Q3_TV+1.5*IQR_TV)
+print("upper_limit_TV",upper_limit_TV)
+lower_limit_TV=(Q1_TV-1.5*IQR_TV)
+print("lower_limit_TV",lower_limit_TV)
+
+df1['TV']=np.where(df1['TV']>upper_limit_TV,upper_limit_TV,np.where(df1['TV']<lower_limit_TV,lower_limit_TV,df1['TV']))
+
+pre processing part 4:
+EDA-Exploratory Data Analysis
+1)Multivariates Analysis
+sns.pairplot(df1) ->this graph show the linear comparsion to the columns
+
+df1.corr() ->correlation
+
+Univariate  on dependent variable price:
+sns.displot(df1["Sales"])
+
+if there are any two values are same , it is called Multi collinearity. than we can drop any of that equal Ind Variable.
+Same data we can plot in heatmap for more better understanding.
+sns.heatmap(df1.corr())
+sns.heatmap(df1.corr(), annot=True,cmap="coolwarm")
+
+splitting the data into dependent and independent variable:
+X=df1.drop(["Sales"],axis=1)
+Y=df1[["Sales"]]
+
+working on OLS algorithm regression problem:
+import statsmodels.api as sm # required for adding a constant
+X=sm.add_constant(X)
+
+splitting the data in training and testing:
+from sklearn.model_selection import train_test_split
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,train_size=0.75,random_state=110)
+
+LINEAR REGRESSION FROM SKLEARN:
+from sklearn.linear_model import LinearRegression
+lin_mod=LinearRegression()
+lin_mod.fit(X_train,Y_train)
+print(lin_mod.intercept_) ->[0.89128786]
+print(lin_mod.coef_) ->[[0.         0.19324005 0.18060019 0.01143182]]
+
+#check the performance:
+Y_predict=lin_mod.predict(X_test)
+Y_predict
+pd.DataFrame(Y_predict)
+
+how to predict best fit line like the graph observation point line equation will follow the formula y=mx+c wher m and c calculted in graph which less height of observation
+
+what is the cost formula? ->y=mx+c
+in machine learning term error is called as cost
+in machine learning term predictaion is called as estimate
+
+Linear regression and gradient descent:
+stochastic gradient descent:
+Linear regression is about finding the line of best fit for a dataset. This line can then be used to make predictions.
+
+Gradient descent is a tool to arrive at the line of best fit
+
+Statistics way of computing line of best fit:
+A line can be represented by the formula:
+y = mx + b.
+
+The formula for slope m of the regression line is:
+m = r * (SD of y / SD of x)
+
+r= correlation coefficient between x and y values (r).
+After calculation of m.
+Put the value of x as average value of x. and y as average value of y.
+Value of b can be calculated.
+
+For example m=1.2 and b =-12.87
+Regression line using statistics is y = 1.2x -12.87
+
+Gradient descent way of computing line of best fit:
+
+In gradient descent, you start with a random line. Then you change the parameters of the line (i.e. slope and y-intercept) little by little to arrive at the line of best fit.
+
+How do you know when you arrived at the line of best fit?
+For every line you try — line A, line B, line C, etc — you calculate the sum of squares of the errors. If line B has a smaller value than line A, then line B is a better fit, etc.
+
+Mathematics of Gradient Descent Algorithm
+In machine learning terminology, the sum of squared error is called the “cost”. This cost equation is:
+cost = (1 / 2m) Σ(i=1 to m) (h(x(i)) - y(i))²
+
+Cost Equation
+Where:
+h(x(i))          = the predicted value of regression line
+y(i)             = the actual value from dataset
+(h(x(i)) - y(i))² = one error squared
+m                = number of data points
+
+This equation is therefore roughly "sum of squared errors" as it computes the sum of predicted value minus actual value squared.
+The 1/2m is to "average" the squared error over the number of data points so that the number of data points doesn't affect the function.
+In gradient descent, the goal is to minimize the cost function.
+We do this by trying different values of slope and intercept. But which values to try and how do you go about changing those values?
+We change their values according to the gradient descent formula, whichcomes from taking the partial derivative of the cost function.
+
+By taking the partial derivative, you arrive at the formula:
+new_intercept = old_intercept - α · (1/m) Σ(h(x(i)) - y(i))
+new_slope = old_slope - α · (1/m) Σ((h(x(i)) - y(i)) · x(i))
+
+Gradient descent formula by taking partial derivative of the cost function
+This formula computes by how much you change your theta with eachiteration.
+The alpha (α) is called the learning rate. The learning rate determines how big the step would be on each iteration. It's critical to have a good learning rate because if it's too large your algorithm will not arrive at the minimum, and if it's too small, your algorithm will take forever to get there. For my example, I picked the alpha to be 0.001.
+Gradient descent is an algorithm that approaches the least squared regression line via minimizing sum of squared errors through multiple iterations.
+
+Example:
+House size & price Data:
+House Size sq.ft (X)      House Price (Y)
+2100                      199,000
+2400                      219,000
+2425                      245,000
+2550                      255,000
+2600                      279,000
+2700                      308,000
+2700                      312,000
+2875                      319,000
+3350                      324,000
+3450                      405,000
+
+1. Scale the data using Standard Scaler or Min-Max Scaler.
+
+Normalized data.
+
+House Size sq.ft (X new)     House Price (Y new)
+
+0.22222222                   0.097087379
+0.240740741                  0.223300971
+0.333333333                  0.271844660
+0.37037037                   0.388349515
+0.444444444                  0.529126214
+0.514814814                  0.548543689
+0.574074074                  0.582524272
+0.925925926                  0.606796117
+
+ŷ = a + b × X new
+
+2. Let’s start by initializing the random weights. a= 0.45, b=0.75
+Random Weight	Value
+a	         0.45
+b	         0.75
+
+3.Compute the ŷ
+Consider the random observation from the new scaled data
+X new = 0.222222222,
+Y new = 0.097087379
+
+ŷ = a + b*X new
+ŷ = 0.45 + 0.75*0.222222222
+=0.61666
+
+4. Compute loss
+Residual or Error = ŷ- y new
+= 0.6166666–0.0970873
+= 0.519579
+Objective is to Minimize the error, with the update the besteffective value of a & b.
+
+5. Compute partial differentials:
+Calculate the partial derivative of the total error with respect to weight
+The partial differentials are as follows:
+The partial derivative of total error w.r.t. a (weight)
+= ∂E/∂a
+= ∂(ŷ- y new)/∂a
+= ∂(ŷ- (a+b*X new))/∂a
+= -(ŷ-y new)
+=-0.519579
+
+The partial derivative of total error w.r.t. b (weight)
+= ∂E/∂b
+= ∂(ŷ- y new)/∂b
+= ∂(ŷ- (a+b*X new))/∂b
+=-(ŷ-y new)*X new
+=-0.519579*0.222222222
+= -0.115462064
+
+6. Update the weights:
+Update ‘a’
+Use a small learning rate (alpha=0.01)
+New a = old a — alpha* ∂E/∂a
+= 0.45–0.01 * — 0.519579
+= 0.455196
+
+Update ‘b’
+New b = old b — alpha*∂E/∂b
+= 0.75–0.01 * -0.115462064
+= 0.75115
+
+We have just finished our first iteration of stochastic gradient descent and
+we have updated our weights to be a = 0.455196 and b= 0.455196.
+
+Repeat this process for remaining instances from our dataset.
+
+7. Iteration: 5
+Let’s jump ahead. Below is a list of all the updated values for the coefficients over the 5 iterations.
+
+REGRESSION Problem Evaluation Techniques:
+Regression Models Evaluation metrics The SkLearn package in python provides various models and important tools for machine learning model development. Where it provides some regression model evaluation metrics in the form of functions that are callable from the sklearn package.
+
+Max_error
+Mean Absolute Error
+Mean Squared Error
+Median Squared Error
+R Squared 
+
+Max_error: maximum difference occurred between data:
+from sklearn.metrics import max_error
+original_data = Y_test
+predicted_data = Y_predict
+max_error(original_data,predicted_data)
+
+Mean Absolute Error : mean absolute Difference between the data and its average
+
+from sklearn.metrics import mean_absolute_error
+mean_absolute_error(Y_predict, Y_test)
+
+Mean Squared Error:It is as similar to the above metric where in Mean Squared Error we will be calculating the square of the difference between the predicted and the original data. 
+from sklearn.metrics import mean_squared_error
+#mean_squared_error(original_data,predicted_data)
+mean_squared_error(Y_predict, Y_test)
+
+lets calculate root means square error:
+from sklearn.metrics import mean_squared_error
+lin_mod_rmse=np.sqrt(mean_squared_error(Y_predict,Y_test))
+print("RMSE VALUE FOR LINEAR REGRESSION IS : ",lin_mod_rmse )
+
+Median Absolute Error: This finds the median value of the absolute difference between the original and the predicted data. It is famous for its consistency towards robust to outliers. It helps us to know about the outliers present in the dataset.
+from sklearn.metrics import median_absolute_error
+median_absolute_error(Y_predict, Y_test)
+
+R Squared :This is the most important evaluation metric in the regression evaluation where it gives us an understanding of how well the data get fit towards the regression line. This helps us to find the relationship between the independent variable towards the dependent variable.
+from sklearn.metrics import r2_score
+r2_score(Y_predict, Y_test)
+
+Ordinary Least Squares(OLS):
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+VIF            = pd.DataFrame()
+VIF['feature'] = X.columns
+VIF['VIF']     = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
+VIF
+
+The method of Ordinary Least Squares(OLS) is most widely used model due to its efficiency. This model gives best approximate of true population regression line. The principle of OLS is to minimize the 
+square of errors ( ∑ei2 ).
+WE WILL DO REGRESSION MODEL EVALUATION BY USING OLS METHOD WHICH IS VERY RELIABLE .
+IT WILL GENERATE R SEQUARE VALUE AND OTHER VALUES.
+
+from statsmodels.regression.linear_model import OLS
+import statsmodels.regression.linear_model as smf
+#reg_model1=smf.OLS(endog=Y_train,exog=X_train)
+OLS_training = smf.OLS(Y_train, X_train)
+OLS_training= reg_model1.fit()
+OLS_training
+print("Training dataset \n", OLS_training.summary())
+print("Parameters: \n",OLS_training.params)
+print("R2: ", OLS_training.rsquared)
+print("Standard errors: ", OLS_training.bse)
+print("Predicted values training data set \n: ", OLS_training.predict())
+
+Explaination of OLS Summary report:
+print("Training dataset \n", OLS_training.summary())
+
+output:
+Training dataset 
+                             OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Sales   R-squared:                       0.903
+Model:                            OLS   Adj. R-squared:                  0.901
+Method:                 Least Squares   F-statistic:                     451.5
+Date:                Mon, 09 Jan 2023   Prob (F-statistic):           1.25e-73
+Time:                        14:46:08   Log-Likelihood:                 133.61
+No. Observations:                 150   AIC:                            -259.2
+Df Residuals:                     146   BIC:                            -247.2
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          0.8913      0.047     19.020      0.000       0.799       0.984
+TV             0.1932      0.006     32.512      0.000       0.181       0.205
+Radio          0.1806      0.011     16.206      0.000       0.159       0.203
+Newspaper      0.0114      0.010      1.106      0.271      -0.009       0.032
+==============================================================================
+Omnibus:                       79.780   Durbin-Watson:                   1.931
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              780.703
+Skew:                          -1.619   Prob(JB):                    2.97e-170
+Kurtosis:                      13.697   Cond. No.                         37.5
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+No. Observations: 150  # size of our sample    
+Df Residuals: 146                              
+
+#Degrees of freedom RESIDUAL = N – K
+Where, N = sample size(no. of observations) and  K = number of variables + 1
+DF residual =N-K
+N=150
+K=3+1=4
+DF RESIDUAL=150-4=146
+        
+Df Model: 3   # DF of Model=n-1=4-1=3
+
+#R square
+# Adjusted R square
+# Fstatistics:-F test tells the goodness of fit of a regression. 
+The test is similar to the t-test or other tests we do for the hypothesis.
+#Durbin-Watson
+
+from sklearn.metrics import max_error as ME
+from sklearn.metrics import mean_squared_error as MSE
+from sklearn.metrics import median_absolute_error as MAE
+from sklearn.metrics import r2_score
+original_data = Y_test
+predicted_data = Y_predict_OLS
+
+E1=ME(original_data,predicted_data)
+print("MAX ERROR IS : "  ,E1 )
+E2=MSE(original_data,predicted_data)
+print("MEAN SQUARE ERROR IS : "  ,E2 )
+#ROOT MEAN SQUARE ERROR
+E3=np.sqrt(mean_squared_error(original_data,predicted_data))
+print("ROOT MEAN SQUARE ERROR IS : "  ,E3 )
+E4=MAE(original_data,predicted_data)
+print("MEAN ABSOLUTE ERROR IS : "  ,E4 )
+# Accuracy r2 score
+E5=r2_score(original_data,predicted_data)
+print("R2 Score VALUE Accuracy IS : ",E5 )
+
+Linear Regression used in regression algorithm
+Logistic Regression only used in classification algorithm
+
+Logistic Regression: building classification model
+Logistic regression is a machine learning classification model with similar as Linear Regression
+but it’s not used to predict a continuous outcome. -Not for Regression.
+Instead, it is a statistical BINARY classification model.
+
+Binary classes defined as success and failure: -
+0 (Failure) and 1 (Success), Yes / No ,Selected /Rejected ,True/ False
+
+Decision boundary:
+The S-shaped curve is a sigmoid curve.
+Logistic regression function is also called sigmoid function.
+
+Sigmoid Function
+p = 1 / (1 + e^(-y))
+
+For -∞
+
+p = 1 / (1 + e^-(-∞))
+p = 1 / (1 + ∞)
+p = 1 / ∞
+
+Anything divided by ∞ is 0. Hence for -∞, p = 0.
+
+p = 1 / (1 + e^(-y))
+
+For +∞
+
+p = 1 / (1 + e^-(+∞))
+p = 1 / (1 + 0)
+p = 1
+
+Hence for ∞, p = 1.
+
+Logistic Regression Formula
+Sigmoid Function:
+Mathematical function having a characteristic "S"-shaped curve or sigmoid curve.
+p = 1 / (1 + e^(-y))
+
+Transformation of the Sigmoid Function
+p(1 + e^(-y)) = 1
+p + pe^(-y) = 1
+pe^(-y) = 1 - p
+e^(-y) = (1 - p) / p
+log(e^(-y)) = log((1 - p) / p)
+-y = ln((1 - p) / p)
+y = ln(p / (1 - p))
+
+Hence we have converted the sigmoid function such that y is expressed as p, providing the value of Y (target variable).
+y = ln(p / (1 - p))
+Here (p / (1 - p)) is called the "odds ratio".
+Hence Y can be defined as the log of the odds ratio.
+Y is also called the Log Odds Function, Logistic Function, or Logit Function.
+
+Applying Linear Equation Formula
+exp(log(p / (1 - p))) = exp(a + b₁x₁)
+p / (1 - p) = exp(a + b₁x₁)      [Since exp(log x) = x]
+
+Solving the above equation for p, we get
+p = exp(a + b₁x₁) - p exp(a + b₁x₁)
+p = exp(a + b₁x₁) / (1 + exp(a + b₁x₁))
+
+Finally, we will get the value of probability p in the range of 0 to 1.
+Once we calculate the probabilities, we will plot them to get an S-curve. Now, we just keep rotating the log(odds) line and projecting the data points onto it and then transforming it to probabilities and calculating the log-likelihood. We will repeat this process until we maximize the log-likelihood.
+
+Keeping Threshold = 0.5
+Above 0.5 → Output belongs to Class 1
+Below 0.5 → Output belongs to Class 0
+
+from sklearn.linear_model import LogisticRegression
+lr = LogisticRegression()
+lr.fit(x_train, y_train)
+y_pred_lr = lr.predict(x_test)
+print("LOGISTIC REGRESSION TRAINING ACCURACY:", accuracy_score(y_train, lr.predict(x_train)))
+print("LOGISTIC REGRESSION TESTING ACCURACY:", accuracy_score(y_test, y_pred_lr))
+
+MATHEMATICS of Logistic Regression: ->should learn
+Maximum Likelihood Estimation
+Logistic Regression Formula
+Sigmoid Function
+Mathematical function having a characteristic "S"-shaped curve or sigmoid curve.
+
+p = 1 / (1 + e^(-y))
+
+The logistic regression function converts the values of logits, also called log-odds, that range from -∞ to +∞ to a range between 0 and 1.
+
+What is Multicollinirity ? ->when the two column doing same thing that is Multicollinirity and 0.9 is the benchmark if less or more than 0.9 drop the column
+if i did not make Multicollinirity drop column it will not make any impact on the accuracy
+

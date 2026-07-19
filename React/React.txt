@@ -1,0 +1,804 @@
+React:
+
+SPA -> Single Page Application
+
+Install node js
+node --version
+npm install vite@latest
+npm create vite@latest
+cd your-project-name
+npm install
+npm run dev -> to start project
+
+3.React components:
+Navbar.jsx
+function Navbar() {
+    return (
+        <div>
+            <h1>My Website</h1>
+            <button>Login</button>
+        </div>
+    );
+}
+export default Navbar;
+
+Course.jsx
+const course = "React"
+function Course() {
+    return (
+        <div>
+            <h1>Course Page for {course}</h1>
+            <p>Welcome to the course page!</p>
+        </div>
+    );
+}
+export default Course;
+
+App.jsx
+import Navbar from './Navbar'
+import Course from './Course'
+
+function App() {
+  const [count, setCount] = useState(0)
+
+  return (
+    <> -> we should use wrap for more number components
+   <Navbar />
+   <Course />
+   </>
+  )
+}
+export default App;
+
+main.jsx -> start from main.jsx
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+
+4.Styles in React:
+there are three types styling:
+1. Global Styling
+2. Module Styling
+3. External styling
+
+Global Styling:
+Course.jsx
+function Course() {
+    return (
+        <div className="card"> -> always use className not class
+            <h1>Course Page</h1>
+            <p>Welcome to the course page!</p>
+        </div>
+    );
+}
+export default Course;
+
+index.css
+.card{
+  background-color: var(--accent-bg);
+}
+
+Module Styling:
+Course/Course.jsx
+import styles from './Course.module.css'
+
+function Course() {
+    return (
+        <div className="card">
+            <h1 className={styles.head}>Course Page</h1>
+            <p>Welcome to the course page!</p>
+        </div>
+    );
+}
+export default Course;
+
+Course.module.css
+.head{
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+Internal Styling:
+Course.jsx
+import styles from './Course.module.css'
+
+function Course() {
+
+    const style = {
+        color: 'blue',
+        fontSize: '18px',
+    };
+    return (
+        <div className="card">
+            <h1 className={styles.head}>Course Page</h1>
+            <p style={style}>Welcome to the course page!</p>
+        </div>
+    );
+}
+export default Course;
+
+5.Props in React:
+Course.jsx
+import styles from './Course.module.css'
+import HTML from '../assets/wallpaperflare.com_wallpaper.jpg'
+
+function Course(props) {
+
+    const style = {
+        color: 'blue',
+        fontSize: '18px',
+    };
+    
+    return (
+        <div className={styles.card}>
+            {/* <h1 className={styles.head}>Course Page</h1> */}
+            <img src={props.image} alt={props.name} />
+            {/* <h1>{course}</h1> */}
+            <h1>{props.name}</h1>
+            {/* <p style={style}>Welcome to the course page!</p> */}
+            <p>{props.price}</p>
+        </div>
+    );
+    }
+    
+    Course.defaultProps = {
+        name: 'Default Course',
+        price: '$0.00',
+        image: HTML,
+    };
+}
+export default Course;
+
+App.jsx
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from './assets/vite.svg'
+import heroImg from './assets/hero.png'
+import './App.css'
+import Navbar from './Navbar'
+import Course from './Course/Course'
+import HTML from './assets/HTML.png'
+import CSS from './assets/CSS.png'
+import JavaScript from './assets/JavaScript.png'
+
+function App() {
+  const [count, setCount] = useState(0)
+
+  return (
+    <>
+   {/* <Navbar /> */}
+   <Course name="HTML" price="$19.99" image={HTML}/>
+   <Course name="CSS" price="$19.99" image={CSS} />
+   <Course name="JavaScript" price="$19.99" image={JavaScript}/>
+   <Course/>
+   </>
+  )
+}
+export default App;
+
+6.Conditional Rendering in React:
+Course.jsx
+import styles from './Course.module.css'
+import HTML from '../assets/wallpaperflare.com_wallpaper.jpg'
+
+function Course(props) {
+
+    const style = {
+        color: 'blue',
+        fontSize: '18px',
+    };
+    if(props.show){ ->this is condition rendering
+    return (
+        <div className={styles.card}>
+            {/* <h1 className={styles.head}>Course Page</h1> */}
+            <img src={props.image} alt={props.name} />
+            {/* <h1>{course}</h1> */}
+            <h1>{props.name}</h1>
+            {/* <p style={style}>Welcome to the course page!</p> */}
+            <p>{props.price}</p>
+        </div>
+    );
+    }
+    else{
+        return (
+            <div className={styles.card}>
+                <h1>Course is not available</h1>
+            </div>
+        );
+    }
+    Course.defaultProps = {
+        name: 'Default Course',
+        price: '$0.00',
+        image: HTML,
+    };
+}
+export default Course;
+
+App.jsx
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from './assets/vite.svg'
+import heroImg from './assets/hero.png'
+import './App.css'
+import Navbar from './Navbar'
+import Course from './Course/Course'
+import HTML from './assets/HTML.png'
+import CSS from './assets/CSS.png'
+import JavaScript from './assets/JavaScript.png'
+
+function App() {
+  const [count, setCount] = useState(0)
+
+  return (
+    <>
+   {/* <Navbar /> */}
+   <Course name="HTML" price="$19.99" image={HTML} show={true}/>
+   <Course name="CSS" price="$19.99" image={CSS} />
+   <Course name="JavaScript" price="$19.99" image={JavaScript} show={true} />
+   <Course/>
+   </>
+  )
+}
+export default App;
+
+7.Dynamic content loading in React: -> it used when we fetch data from backend and set to component
+CoursesList.jsx
+import HTML from '../assets/HTML.png'
+import CSS from '../assets/CSS.png'
+import JavaScript from '../assets/JavaScript.png'
+import Course from './Course'   
+
+function CoursesList() {
+
+    const courses = [
+        { name: 'HTML', price: '$19.99', image: HTML, show: true },
+        { name: 'CSS', price: '$19.99', image: CSS, show: false },
+        { name: 'JavaScript', price: '$19.99', image: JavaScript, show: true },
+    ];
+
+    const coursesList = courses.map((course) => (
+        <Course
+            key={course.name}
+            name={course.name}
+            price={course.price}
+            image={course.image}
+            show={course.show}
+        />
+    ));
+
+    return (
+        <>
+            {coursesList}
+        </>
+    );
+}
+export default CoursesList;
+
+App.jsx
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from './assets/vite.svg'
+import heroImg from './assets/hero.png'
+import './App.css'
+import Navbar from './Navbar'
+import Course from './Course/Course'
+import HTML from './assets/HTML.png'
+import CSS from './assets/CSS.png'
+import JavaScript from './assets/JavaScript.png'
+import CoursesList from './Course/CoursesList'
+
+function App() {
+  const [count, setCount] = useState(0)
+
+  return (
+    <>
+      <CoursesList/>
+   </>
+  )
+}
+export default App;
+
+Course.jsx
+import styles from './Course.module.css'
+import HTML from '../assets/wallpaperflare.com_wallpaper.jpg'
+import PropTypes from 'prop-types' -> import is compulsory
+
+function Course(props) {
+
+    const style = {
+        color: 'blue',
+        fontSize: '18px',
+    };
+
+    return (
+        <div className={styles.card}>
+            {/* <h1 className={styles.head}>Course Page</h1> */}
+            <img src={props.image} alt={props.name} />
+            {/* <h1>{course}</h1> */}
+            <h1>{props.name}</h1>
+            {/* <p style={style}>Welcome to the course page!</p> */}
+            <p>{props.price}</p>
+        </div>
+    );
+    Course.defaultProps = {
+        name: 'Default Course',
+        price: '$0.00',
+        image: HTML,
+    };
+
+    Course.propTypes = { -> it used to set props types
+        name: PropTypes.string,
+        price: PropTypes.string,
+        image: PropTypes.string,
+        show: PropTypes.bool,
+    };
+}
+export default Course;
+
+8.Filters and Sorting in React:
+import HTML from '../assets/HTML.png'
+import CSS from '../assets/CSS.png'
+import JavaScript from '../assets/JavaScript.png'
+import Course from './Course'   
+
+function CoursesList() {
+
+    const courses = [
+        {},
+        { name: 'HTML', price: 299, image: HTML, show: true },
+        { name: 'CSS', price: 399, image: CSS, show: false },
+        { name: 'JavaScript', price: 499, image: JavaScript, show: true },
+    ];
+
+    courses.sort((a, b) => b.price - a.price); -> sorting b-a is descending and a-b is ascending order
+    const filteredCourses = courses.filter(course => course.price > 300); -> filtering price >300
+
+    const coursesList = filteredCourses.map((course,index) => (
+        <Course
+            key={index} -> always the key is important
+            name={course.name}
+            price={course.price}
+            image={course.image}
+            show={course.show}
+        />
+    ));
+
+    return (
+        <>
+            {coursesList}
+        </>
+    );
+}
+export default CoursesList;
+
+9.Click events in React
+Course.jsx
+import styles from './Course.module.css'
+import HTML from '../assets/wallpaperflare.com_wallpaper.jpg'
+
+function Course(props) {
+
+    function BuyCourse(discount, event) {
+        console.log(`You have bought the ${props.name} course for ${props.price} for a discount of ${discount}`);
+        console.log(event);
+    }
+
+    const style = {
+        color: 'blue',
+        fontSize: '18px',
+    };
+
+    return (
+        props.name && <div className={styles.card}>
+            {/* <h1 className={styles.head}>Course Page</h1> */}
+            <img src={props.image} alt={props.name} />
+            {/* <h1>{course}</h1> */}
+            <h1>{props.name}</h1>
+            {/* <p style={style}>Welcome to the course page!</p> */}
+            <p>{props.price}</p>
+            <button onClick={(event) => { BuyCourse(20,event) }}>Buy Now</button> ->cannot declare like onClick="BuyCourse()" we should declare like onClick={BuyCourse} and when we send parameters  onClick={BuyCourse(20)} with clicking it will automatically called for that we use anonymous function which function onClick={(event) => { BuyCourse(20,event) }}
+        </div>
+    );
+}
+export default Course;
+
+10.Use State Hook in React:
+Course.jsx
+import styles from './Course.module.css'
+import HTML from '../assets/wallpaperflare.com_wallpaper.jpg'
+import { useState } from 'react'
+
+function Course(props) {
+
+    //let purchased = false; -> this is local variable
+    const [purchased, setPurchased] = useState(false); -> this is we use useState here purchased is state variable and setPurchased is a function which used set values
+    
+    function BuyCourse(discount, event) {
+        console.log(`You have bought the ${props.name} course for ${props.price} for a discount of ${discount}`);
+        console.log(event);
+        setPurchased(true);
+        console.log(purchased);
+
+    }
+
+    const [discount, setDiscountValue] = useState(0);
+
+    function setDiscount(discount) {
+        console.log(`Discount of ${discount} has been set for the ${props.name} course`);
+        setDiscountValue(discount);
+    }
+    const style = {
+        color: 'blue',
+        fontSize: '18px',
+    };
+      return (
+        props.name && <div className={styles.card}>
+            {/* <h1 className={styles.head}>Course Page</h1> */}
+            <img src={props.image} alt={props.name} />
+            {/* <h1>{course}</h1> */}
+            <h1>{props.name}</h1>
+            {/* <p style={style}>Welcome to the course page!</p> */}
+            <p>{discount > 0 ? `${(props.price * (1 - discount / 100)).toFixed(2)}` : `${props.price.toFixed(2)}`}</p>
+            <button onClick={(event) => { BuyCourse(20,event) }}>Buy Now</button>
+            <br></br>
+            <br></br>
+            <button onClick={() => { setDiscount(20) }}>Set Discount</button>
+            <p>{purchased ? 'Purchased' : 'Not Purchased'}</p>
+            <p>Current Discount: {discount}%</p>
+        </div>
+    );
+  }
+export default Course;
+
+11.Method As Props in React
+CourseList.jsx
+import HTML from '../assets/HTML.png'
+import CSS from '../assets/CSS.png'
+import JavaScript from '../assets/JavaScript.png'
+import Course from './Course'   
+import { useState } from 'react'
+
+function CoursesList() {
+
+       const [courses, setCourses] = useState([
+        {},
+        { id: 1, name: 'HTML', price: 299, image: HTML, show: true ,delete: {deleteCourse}},
+        { id: 2, name: 'CSS', price: 399, image: CSS, show: false ,delete: {deleteCourse}},
+        { id: 3, name: 'JavaScript', price: 499, image: JavaScript, show: true ,delete: {deleteCourse}},
+    ]); 
+
+    courses.sort((a, b) => b.price - a.price);
+    const filteredCourses = courses.filter(course => course.price > 100);
+
+    function deleteCourse(id) {
+        console.log(`Deleting course with id: ${id}`);
+        const newcourses = filteredCourses.filter(course => course.id !== id);
+        setCourses(newcourses);
+    }
+
+    const coursesList = filteredCourses.map((course,index) => (
+        <Course
+            key={index}
+            name={course.name}
+            price={course.price}
+            image={course.image}
+            show={course.show}
+            id={course.id}
+            deleteCourse={deleteCourse}
+        />
+    ));
+
+    return (
+        <>
+            {coursesList}
+        </>
+    );
+}
+export default CoursesList;
+
+12.Use effect in React
+CourseList.jsx
+import HTML from '../assets/HTML.png'
+import CSS from '../assets/CSS.png'
+import JavaScript from '../assets/JavaScript.png'
+import Course from './Course'   
+import { useState } from 'react'
+
+function CoursesList() {
+
+       const [courses, setCourses] = useState([
+        {},
+        { id: 1, name: 'HTML', price: 299, image: HTML, show: true ,delete: {deleteCourse}},
+        { id: 2, name: 'CSS', price: 399, image: CSS, show: false ,delete: {deleteCourse}},
+        { id: 3, name: 'JavaScript', price: 499, image: JavaScript, show: true ,delete: {deleteCourse}},
+    ]); 
+
+    useEffect(() => { -> when courses rerender only the useeffect will work
+        console.log('Courses state has changed');
+    }, [courses]); -> it will only when courses rerender useeffort works not for others and if i give [] it will not call useeffort, if we will mention array it will always call useeffort  when it will rerender
+
+    courses.sort((a, b) => b.price - a.price);
+    const filteredCourses = courses.filter(course => course.price > 100);
+
+    function deleteCourse(id) {
+        console.log(`Deleting course with id: ${id}`);
+        const newcourses = filteredCourses.filter(course => course.id !== id);
+        setCourses(newcourses);
+    }
+
+    const coursesList = filteredCourses.map((course,index) => (
+        <Course
+            key={index}
+            name={course.name}
+            price={course.price}
+            image={course.image}
+            show={course.show}
+            id={course.id}
+            deleteCourse={deleteCourse}
+        />
+    ));
+
+    return (
+        <>
+            {coursesList}
+        </>
+    );
+}
+
+https://jsonplaceholder.typicode.com/
+
+13.Fetch API data in React:
+dummyData.json
+{"courses": [
+    { "id": 1, "name": "HTML", "price": 299, "image": "http://localhost:3000/assets/HTML.png", "show": true, "author": "Surya", "hours": 42, "rating": 4.8, "originalPrice": 999, "offer": 80},
+    { "id": 2, "name": "CSS", "price": 399, "image": "http://localhost:3000/assets/CSS.png", "show": false, "author": "Harish", "hours": 36, "rating": 4.6, "originalPrice": 799, "offer": 70},
+    { "id": 3, "name": "JavaScript", "price": 499, "image": "http://localhost:3000/assets/JavaScript.png", "show": true, "author": "Sugumar", "hours": 50, "rating": 4.9, "originalPrice": 1299, "offer": 85}
+]}
+
+CourseList.jsx
+import Course from './Course'   
+import { useState, useEffect } from 'react'
+
+function CoursesList() {
+
+    const [courses, setCourses] = useState(null);
+    const [dummy, setDummy] = useState(true);
+
+    // useEffect(() => {
+    // fetch('https://jsonplaceholder.typicode.com/posts')
+    // .then(response => response.json())
+    // .then(data => {
+    //     console.log(data);
+    // });
+    // }, []);
+
+     useEffect(() => {
+    fetch('http://localhost:3000/courses')
+    .then(response => response.json())
+    .then(data => {
+        setCourses(data);
+    });
+    }, []);
+
+    if(!courses) {
+        return <></>;
+    }
+    courses.sort((a, b) => b.price - a.price);
+    const filteredCourses = courses.filter(course => course.price > 100);
+
+    function deleteCourse(id) {
+        console.log(`Deleting course with id: ${id}`);
+        const newcourses = filteredCourses.filter(course => course.id !== id);
+        setCourses(newcourses);
+    }
+
+    const coursesList = filteredCourses.map((course,index) => (
+        <Course
+            key={index}
+            name={course.name}
+            price={parseInt((course.price / 100) * course.offer).toFixed(2)}
+            image={course.image}
+            show={course.show}
+            id={course.id}
+            author={course.author}
+            hours={course.hours}
+            rating={course.rating}
+            offer={course.offer}
+            originalPrice={course.originalPrice}
+            deleteCourse={deleteCourse}
+        />
+    ));
+
+    return (
+        <>
+            {coursesList}
+            <button onClick={() => setDummy(false)}>Dummy</button>
+        </>
+    );
+}
+
+export default CoursesList;
+
+// npx json-server --watch data/dummyData.json --port 3000 --static ./data 
+
+14.Error handling in React:
+import Course from './Course'   
+import { useState, useEffect } from 'react'
+
+function CoursesList() {
+
+
+    const [courses, setCourses] = useState(null);
+    const [dummy, setDummy] = useState(true);
+    const [error, setError] = useState(null);  
+    
+    useEffect(() => {
+        setTimeout(() => {
+            console.log('Fetching courses from API...');
+    fetch('http://localhost:3000/courses')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status} ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        setCourses(data);
+    })
+    .catch(error => {
+        setError(error.message);
+        console.log('Error fetching courses:', error.message);
+    })
+        }, 2000);
+    }, []);
+
+    if(!courses) {
+        return <><center><img src="data/assets/Loading.gif" alt="Loading..." /></center></>;
+    }
+    courses.sort((a, b) => b.price - a.price);
+    const filteredCourses = courses.filter(course => course.price > 100);
+
+    function deleteCourse(id) {
+        console.log(`Deleting course with id: ${id}`);
+        const newcourses = filteredCourses.filter(course => course.id !== id);
+        setCourses(newcourses);
+    }
+
+    const coursesList = filteredCourses.map((course,index) => (
+        <Course
+            key={index}
+            name={course.name}
+            price={parseInt((course.price / 100) * course.offer).toFixed(2)}
+            image={course.image}
+            show={course.show}
+            id={course.id}
+            author={course.author}
+            hours={course.hours}
+            rating={course.rating}
+            offer={course.offer}
+            originalPrice={course.originalPrice}
+            deleteCourse={deleteCourse}
+        />
+    ));
+
+    return (
+        <>
+            {coursesList}
+            <button onClick={() => setDummy(false)}>Dummy</button>
+        </>
+    );
+}
+
+export default CoursesList;
+
+// npx json-server --watch data/dummyData.json --port 3000 --static ./data
+
+15.Custom hooks in React:
+CourseList.jsx:
+import Course from './Course'   
+import useFetch from './useFetch'
+
+function CoursesList() {
+    
+    const [courses, dummy, error] = useFetch('http://localhost:3000/courses');
+
+    if(!courses) {
+        return <><center><img src="data/assets/Loading.gif" alt="Loading..." /></center></>;
+    }
+    courses.sort((a, b) => b.price - a.price);
+    const filteredCourses = courses.filter(course => course.price > 100);
+
+    function deleteCourse(id) {
+        console.log(`Deleting course with id: ${id}`);
+        const newcourses = filteredCourses.filter(course => course.id !== id);
+        setCourses(newcourses);
+    }
+
+    const coursesList = filteredCourses.map((course,index) => (
+        <Course
+            key={index}
+            name={course.name}
+            price={parseInt((course.price / 100) * course.offer).toFixed(2)}
+            image={course.image}
+            show={course.show}
+            id={course.id}
+            author={course.author}
+            hours={course.hours}
+            rating={course.rating}
+            offer={course.offer}
+            originalPrice={course.originalPrice}
+            deleteCourse={deleteCourse}
+        />
+    ));
+
+    return (
+        <>
+            {coursesList}
+            <button onClick={() => setDummy(false)}>Dummy</button>
+        </>
+    );
+}
+
+export default CoursesList;
+
+// npx json-server --watch data/dummyData.json --port 3000 --static ./data
+
+16.Onchange event in React:
+Login.jsx:
+import { useState } from "react";
+
+function Login() {
+
+    const [pwd1, setPwd1] = useState();
+    const [pwd2, setPwd2] = useState();
+    const [match, setMatch] = useState(true);
+
+    function handlepwd1Change(event) {
+        setPwd1(event.target.value);
+        console.log(pwd1);  
+    }
+
+    function handlepwd2Change(event) {
+        setPwd2(event.target.value);
+        if(pwd1 == event.target.value){
+            console.log("Password Matched");
+            setMatch(true);
+        }
+        else{
+            console.log("Password Not Matched");
+            setMatch(false);
+        }
+
+    }
+    return (
+        <form style={{width:"50%", margin:"auto", marginTop:"50px"}}>
+  <div className="form-group">
+    <label>Email address</label>
+    <input type="email" className="form-control" placeholder="Enter email"/>
+  </div>
+  <div className="form-group">
+    <label>Password</label>
+    <input type="password" className="form-control" placeholder="Password" value={pwd1} onChange={handlepwd1Change}/>
+  </div>
+  <div className="form-group">
+     <label>Re-enter Password</label>
+     <input type="password" className="form-control" placeholder="Password" value={pwd2} onChange={handlepwd2Change}/>
+  </div>
+  {!match && <p>Passwords do not match</p>}
+  <div className="form-check">
+    <input type="checkbox" className="form-check-input"/>
+    <label className="form-check-label" for="exampleCheck1">I agree</label>
+  </div>
+  <button type="submit" className="btn btn-primary">Submit</button>
+</form>
+    );
+}
+export default Login;

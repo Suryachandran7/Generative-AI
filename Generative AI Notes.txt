@@ -1,0 +1,180 @@
+Complete Guide to Building, Deploying, and Optimizing Generative AI with Langchain and Huggingface
+
+SECTION 1: Introduction
+
+
+1. Introduction-What We will Learn In This Course
+
+Generative AI Course with LangChain
+
+1st End to End Project
+
+1) Python Programming
+
+→ Basic → Advanced
+
+2) NLP in Deep Learning
+
+→ RNN, LSTM RNN, GRU RNN, Bidirectional RNN
+→ Encoder-Decoder, Attention Mechanism, Transformer, BERT
+
+↓
+Basic Building Block
+↓
+LLM Models
+↓
+Generative AI
+
+3) LangChain Ecosystem
+
+→ Generative AI Framework
+
+Paid LLM, Multi-modal, Open Source LLM
+LangChain Core
+LangChain Community
+LangChain Tools
+
+Topics:
+
+Agents
+Chat with SQL
+Vector Database
+Retrievers
+Chains
+Text Summarization
+Chatbots with Chat Message History (Streamlit)
+4) Deployment Techniques
+
+→ Free Resources Available
+
+5) Fine Tuning Techniques
+
+→ Google Colab
+→ Quantization, LoRA & QLoRA
+
+↓
+Fine-tune with Open Source LLM Models
+
+6) GenAI in AWS
+
+→ AWS Bedrock
+→ Lambda Functions
+→ API Gateway
+
+End-to-End Project → AWS SageMaker
+
+7) Nvidia NIM
+
+→ End-to-End Project (LangChain)
+
+8) CrewAI
+
+→ Multi AI Agents → Gen AI Apps
+
+LLM and Multi Model
+OpenAI → GPT-4o, GPT-4 Turbo, OpenAI Embeddings
+Google → Gemini, Gemini 2
+Meta → LLaMA 3, CodeLLaMA
+Anthropic → Mistral
+Hugging Face → Models
+
+→ Groq AI Infrastructure
+→ LPU Region
+
+
+2. Course Materials
+https://github.com/krishnaik06/Complete-Python-Bootcamp
+
+
+3. Getting Started With VS Code
+conda create -p venv python=3.12 -> create isolated Python environment
+
+pip install ipykernel -> enable it for notebooks
+
+
+4. Different Ways Of creating Python Environment
+Using venv (built-in)
+python -m venv venv
+
+✔ Default Python tool
+✔ Lightweight
+
+Using conda
+conda create -p venv python=3.12
+
+✔ Good for Data Science / AI
+✔ Manages Python + packages
+
+Using virtualenv
+pip install virtualenv
+virtualenv venv
+
+✔ Older alternative to venv
+✔ More flexible
+
+Using pipenv
+pip install pipenv
+pipenv install
+
+✔ Combines env + dependency management
+✔ Uses Pipfile
+
+5. Solve-Conda Not Recognized Issue
+https://stackoverflow.com/questions/44515769/conda-is-not-recognized-as-internal-or-external-command
+
+| Type       | Ordered | Duplicates | Mutable |
+| ---------- | ------- | ---------- | ------- |
+| List       | Yes     | Yes        | Yes     |
+| Tuple      | Yes     | Yes        | No      |
+| Set        | No      | No         | Yes     |
+| Dictionary | Yes     | Keys No    | Yes     |
+
+
+pip install -r requirements.txt
+
+streamlit run filename.py -> to run streamlit
+
+NLP - National Language Programming
+Machine Learning for NLP:
+Tokenization IN NLP:
+Topics
+Corpus → Paragraph ✅
+Documents → Sentences ✅
+Vocabulary → Unique Words
+Words
+Tokenization
+Corpus
+"My name is KRISH and I have
+an interest in teaching ML, NLP
+and DL. I am also a YouTuber."
+
+⬇
+
+Tokens (Sentences)
+My name is KRISH and I have an interest in teaching ML, NLP and DL.
+I am also a YouTuber.
+Word Tokenization
+
+Sentence:
+
+"My name is KRISH and I have an interest in teaching ML, NLP and DL"
+Tokens (Words)
+["My", "name", "is", "KRISH", "and", "I",
+ "have", "an", "interest", "in",
+ "teaching", "ML", "NLP", "and", "DL"]
+Simple Meaning
+Corpus → Collection of paragraphs/documents
+Document → Collection of sentences
+Vocabulary → Unique words in the corpus
+Tokenization → Splitting text into smaller parts (sentences or words)
+Types of Tokenization
+Sentence Tokenization
+Word Tokenization
+Subword Tokenization
+Character Tokenization
+
+Open Source Libraries - NLTK,Spacy
+
+pip install nltk
+
+http://localhost:8888/lab

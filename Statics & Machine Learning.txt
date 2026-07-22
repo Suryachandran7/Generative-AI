@@ -1949,3 +1949,55 @@ accuracy_score(Y_train,Y_predict_train)
 
 # testing accuracy:
 accuracy_score(Y_test,Y_predict_test)
+
+split the data independent and dependent columns as x and y 
+
+make x independent split training and testing as x_train and x_test
+
+make y dependent split training and testing as y_train and y_test
+
+make x_train and the values and assign to x_predict_train
+
+comapre x_train and x_predict_train and make for test datas also
+
+CLASSIFICATION MODEL EVALUATION
+CONFUSION MATRIX
+
+Another example of MEDICAL TEST: -
+ True Positives (TP): These are cases in which we predicted yes (they have the disease), and they do have the disease.
+
+ True Negatives (TN): We predicted no, and they don't have the disease.
+
+ False Negatives (FN): We predicted no, but they actually do have the disease.(Also known as a "Type II error.")
+
+ False Positives (FP): We predicted yes, but they don't actually have the disease.(Also known as a "Type I error.")
+
+confusion matrix Recall precision ROC AUC:
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
+import os
+os.getcwd()
+
+y_test=[1,1,1,0,0,
+       1,1,1,1,1,
+       1,1,1,1,1,
+       1,1,1,1,1]
+pred=[1,1,1,0,0,
+      1,1,1,1,1,
+       1,1,1,1,1,
+       1,1,1,1,1]
+cm2=confusion_matrix(y_test,pred) ->y_test is row which is True and pred is column which is predict
+cm2
+
+output: array([[ 2,  0],
+                                    [ 0, 18]], dtype=int64)
+
+Recall, specificity, sensitivity and accuracy:
+#specificity, sensitivity and accuracy
+We can also calculate the following metrics using the confusion matrix:
+
+Sensitivity: The “true positive rate” – the percentage of individuals the model correctly predicted would default.
+Specificity: The “true negative rate” – the percentage of individuals the model correctly predicted would not default.
+Total misclassification rate: The percentage of total incorrect classifications made by the model.
+

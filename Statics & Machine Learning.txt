@@ -1995,9 +1995,59 @@ output: array([[ 2,  0],
 
 Recall, specificity, sensitivity and accuracy:
 #specificity, sensitivity and accuracy
-We can also calculate the following metrics using the confusion matrix:
 
+We can also calculate the following metrics using the confusion matrix:
 Sensitivity: The “true positive rate” – the percentage of individuals the model correctly predicted would default.
 Specificity: The “true negative rate” – the percentage of individuals the model correctly predicted would not default.
 Total misclassification rate: The percentage of total incorrect classifications made by the model.
 
+from sklearn.metrics import classification_report,confusion_matrix,accuracy_score
+import seaborn as sns
+import matplotlib.pyplot as plt     
+from sklearn.metrics import confusion_matrix
+
+y_test=[1,1,1,0,0, 
+        1,1,1,1,0,
+       1,1,1,1,1, 
+      1,1,1,1,1,]
+# In true data set 17 patient has disease, 3 patient has NO Disease
+pred=[1,1,1,0,0, 
+        1,1,1,1,1,
+       1,1,1,1,1, 
+      0,0,0,0,0,]
+# In pred dataset 12 patient has disease predicted correctly. TP=12
+# 2 patient has No disease correct predicted as No disease. TN=2.
+# 5 patient actually has disease predicted wrong as No disease. FN=5
+# 1 patient has No disease wrong prediction as disease. FP=1
+
+cm30 = confusion_matrix(y_test, pred)
+ax= plt.subplot()
+sns.heatmap(cm30, annot=True, fmt='g',cmap='rocket_r');#cmap='rocket_r' for color inverse of the scale
+
+#annot=True to annotate cells, ftm='g' to disable scientific notation
+
+# labels, title and ticks
+ax.set_xlabel('Predicted labels');
+ax.set_ylabel('True labels'); 
+
+ax.set_title('Confusion Matrix');
+
+tn, fp, fn, tp = confusion_matrix(y_test, pred).ravel()  ->navel is used assign confusion mtrix value to varibles
+print("true negative", tn,   "false positive",fp,"false negative  ",fn,"true positive",tp)
+print(classification_report(y_test, pred))
+output:               precision    recall  f1-score   support
+
+                                   0       0.29      0.67      0.40         3
+                                  1        0.92      0.71      0.80        17
+
+                accuracy                                    0.70        20
+               macro avg       0.60      0.69      0.60        20
+   weighted avg       0.83      0.70      0.74        20
+
+precision will which 0 is 0 and 1 is 1 using formula precision=tp/tp+fn
+the benchmark must be greater than 85% and both 0 & 1 class must be 85%
+No it depends on the data set like for example if for loan predict fraud 99% and nofraud 66% it is ok because in the bank point of view it is good
+
+ROC AUC Curve:
+Based on sklearn documentation, predict_proba returns probability estimates for all classes and the results are ordered by the label of classes.
+our lr model is a binary classifier. Hence, lr.predict_proba(X_test1) returns 2 columns for the negative(0) and positive class(1).

@@ -2051,3 +2051,186 @@ No it depends on the data set like for example if for loan predict fraud 99% and
 ROC AUC Curve:
 Based on sklearn documentation, predict_proba returns probability estimates for all classes and the results are ordered by the label of classes.
 our lr model is a binary classifier. Hence, lr.predict_proba(X_test1) returns 2 columns for the negative(0) and positive class(1).
+
+KNN regression/Classifier:
+KNN algorithm used in both regression and classification problem
+KNN is a non parametric method which it is not data to normal distributed
+In regression it work taking neighborhood average nearest
+In Classification it work taking neighborhood majority nearest
+
+Parametric V/s Non-parametric method
+Parametric Method-assume the data is of sufficient “Quality”, exp :- Linear Regression,Logistic Regression.
+In Parametric method the data should be normaly distributed only the result is good.
+
+In Non Parametric method the data is normaly distributerd or not it will give result as good.
+
+KNN model classifies the points based on proximity or distance.
+Important Distance Metrics in Machine Learning
+ Euclidean Distance
+ Manhattan Distance -> called as Cab / Taxi
+ Minkowski distance
+
+1. Euclidean Distance:
+Euclidean Distance represents the shortest distance between two points. p=2
+
+2. Manhattan Distance:
+Manhattan Distance is the sum of absolute differences between points across all the dimensions. Also called L1 Norm ,Taxi Cab Norm. p=1
+
+3.Minkowski distance:
+This distance measure is the generalized form of Euclidean and Manhattan distance metrics. Euclidean distance is represented by this formula when p is equal to 2, and Manhattan distance is denoted with p equal to 1.
+
+KNN method working concept:-
+The K-NN working can be explained on the basis of the below algorithm:
+K value must be odd number it should not largest number beacuse if the value 4 if we predict we will win match today 2 loss 2 win will have possibility if the the k value 5 that problem is solved , if the the neighbors is high the k value should should be maintained high
+
+o Step-1: Select the number K of the neighbors
+o Step-2: Calculate the Euclidean distance of K number of neighbors
+o Step-3: Take the K nearest neighbors as per the calculated Euclidean distance.
+o Step-4: Among these k neighbors, count the number of the data points in each category.
+o Step-5: Assign the new data points to that category for which the number of the neighbor is maximum.
+o Step-6: Our model is ready.
+
+KNN considered as lazy.
+
+KNN can be used in regression, the target continuous value is computed as the mean of the target value of k nearest neighbors.
+For classification Problems:-
+from sklearn.neighbors import KNeighborsClassifier
+FOR Regression Problems: -
+from sklearn.neighbors import KNeighborsRegressor
+
+How to select the optimal value of k?
+ Prefer odd k values, as there are chances of tie in even values.
+ K should not be too small.
+ Thumb rule: k should be generally sqrt(n), where n denotes the total number of data points
+ Further, one can try different values of k, and then observe the evaluation metrics to decide upon the best value of k 
+
+
+Python code:-
+from sklearn.neighbors import KNeighborsClassifier
+model_name = ‘K-Nearest Neighbor Classifier’
+knnClassifier = KNeighborsClassifier(n_neighbors = 5, metric =‘minkowski’, p=2) -> when will not given the n_neighbors default value taken as 5 and metric default taken as Euclidean and
+knn_model = Pipeline(steps=[(‘preprocessor’,
+preprocessorForFeatures), (‘classifier’ , knnClassifier)])
+knn_model.fit(X_train, y_train)
+y_pred = knn_model.predict(X_test)
+
+find the more effective value of n_neighbors parameter k value:
+accuracy_K = []
+for k in range(1, 50):
+knn = KNeighborsClassifier(n_neighbors=k)
+knn.fit(X_train1, Y_train)
+Y_pred = knn.predict(X_test)
+accuracy =accuracy_score(Y_test, Y_pred)
+accuracy_K.append(accuracy)
+plt.figure(figsize=(12,8))
+plt.xlabel("k values")
+plt.ylabel("ACCURACY")
+plt.plot(range(1,50),accuracy_K, marker='o', markersize=9)
+
+KNN is a Lazy Learner model
+ Almost all the models get trained on the training dataset, but KNN does not get trained on the training dataset.
+ When we use knn.fit (X train, Y train), this model ‘memorizes’ the dataset. It does not understand it or tries to learn the underlying trend.
+ Now when we ask the model to predict some value, then it takes a lot of time because now it actually will have to recall all the points and work around them so that it can help predict the correct value.
+ Hence where most of the models, take time during training, this model does not take any time during training.
+ Most of the models take no time in prediction, but the KNN model takes a lot of time during the prediction stage.
+
+Important points
+ Since it is a distance-based model, feature scaling is a must for it.
+ Besides logistic regression, the rest all the classification models can work on multi class classification.
+
+Advantages of KNN Algorithm:
+o It is simple to implement.
+o When the label data is too expensive or impossible to obtain.
+o It is robust to the noisy training data
+o It can be more effective if the training data is large.
+
+Disadvantages of KNN Algorithm:
+o Always needs to determine the value of K which may be complex some time.
+o Entire dataset is processed for every prediction, not good for large dataset.
+The computation cost is high because of calculating the distance between the data points for all the training samples. computational Time complexity for each prediction is equal to MNlog(k) M is the dimension of data, N is the size of instance of training data and K is nearest point selected.
+
+KNN Method:
+from sklearn.neighbors import KNeighborsRegressor
+
+#Calculating value of n_neighbors at which error is minimum
+#X_train,X_test,Y_train,Y_test
+
+test_error_rate = []
+for i in range(1,40):
+    knn = KNeighborsRegressor(n_neighbors=i,algorithm='brute', weights='distance')
+    knn.fit(X_train,Y_train)
+    pred_test_i = knn.predict(X_test)
+    test_error_rate.append(np.mean(pred_test_i-Y_test))
+
+plt.figure(figsize=(10,6))
+plt.plot(range(1,40),test_error_rate,color='green', linestyle='dashed', marker='o',markerfacecolor='red', markersize=10)
+plt.title('Error Rate vs. K Value')
+plt.xlabel('K')
+plt.ylabel('Error Rate')
+
+#Error seems minimum at K=10
+knn = KNeighborsRegressor(n_neighbors=15,weights='distance',algorithm='auto', p=3)
+#start_time = time.time()
+knn.fit(X_train,Y_train)
+#end_time = time.time()
+#time_knn = end_time-start_time
+#print(time_knn)
+
+pred = knn.predict(X_test)
+
+original_data = Y_test
+predicted_data = pred
+
+E1=ME(original_data,predicted_data)
+print("MAX ERROR IS : "  ,E1 )
+E2=MSE(original_data,predicted_data)
+print("MEAN SQUARE ERROR IS : "  ,E2 )
+#ROOT MEAN SQUARE ERROR
+E3=np.sqrt(mean_squared_error(original_data,predicted_data))
+print("ROOT MEAN SQUARE ERROR IS : "  ,E3 )
+E4=MAE(original_data,predicted_data)
+print("MEAN ABSOLUTE ERROR IS : "  ,E4 )
+# Accuracy r2 score
+E5=r2_score(original_data,predicted_data)
+print("R2 Score VALUE KNN Accuracy IS : ",E5 )
+
+from sklearn.metrics import r2_score
+r2_score(Y_test,pred)
+
+E5=r2_score(original_data,predicted_data)
+print("R2 Score VALUE KNN Accuracy IS : ",E5 )
+
+scaling & outlier must be done for linear, logistic and KNN
+Scaling should not be make dependepent make on independent variable
+
+from sklearn.preprocessing import LabelEncoder
+encoder=LabelEncoder()
+X20["BusinessTravel"]=encoder.fit_transform(X20["BusinessTravel"]) -> make label encoding
+
+X20["Attrition"]=X20["Attrition"].map({"Yes":1,"No":0}) -> changing the depended variable using map 
+
+X20.corr() ->correlation
+
+changing the index position of dependent column :
+column_to_move = X200.pop("Attrition")
+# insert column with insert(location, column_name, column_value)
+X200.insert(30, "Attrition", column_to_move)
+X200.head()
+
+checking correlation cofficient when large no. of columns:
+corr_high = corr_cols.unstack()
+corr_high
+
+corr_high = corr_high.sort_values(ascending=False)
+corr_high
+
+corr_high = corr_high.drop_duplicates()
+corr_high.head(100)
+
+#option I
+corr_high100 = pd.DataFrame(corr_high[corr_high > 0.50])
+corr_high100.head(100)
+
+#option II
+corr_high50 = corr_high[corr_high > 0.50]
+corr_high50.head(100)

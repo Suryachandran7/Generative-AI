@@ -2234,3 +2234,33 @@ corr_high100.head(100)
 #option II
 corr_high50 = corr_high[corr_high > 0.50]
 corr_high50.head(100)
+
+
+Imbalance data problem comes only in classification
+
+Splitting in dependent and independent variable:
+X = X200.drop(['Attrition'],axis=1)
+Y = X200['Attrition']
+Y.value_counts() -> this output is imbalanced
+output: 0    1233
+       1     237
+Name: Attrition, dtype: int64 
+
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.25, stratify=Y, random_state = 0)
+
+print(classification_report(Y_test,pred)) -> In confusion matrix if precision increase recall decrease and if precision  decrease recall increase
+
+like if chemistry having 200 no of questions and maths having 800 no of question it is imbalanced data set when both dataset are equal only it is balanced
+
+Balancing the DataSet:
+# import SMOTE module from imblearn library
+#!pip install imblearn 
+#(if you don't have imblearn in your system)
+
+three popular methods :- 
+Undersampling  -> if chemistry having 200 no of questions and maths having 800 no of question it is imbalanced data set then reduces the maths question randomly to 200
+Oversampling -> if chemistry having 200 no of questions and maths having 800 no of question it is imbalanced data set then increase the chemistry question 800 using duplicate dataset
+SMOTE sampling -> if chemistry having 200 no of questions and maths having 800 no of question it is imbalanced data set then increase the chemistry question 800 using make similar data like KNN method 
+
+Balancing dataset only applied on training dataset.
+after doing all option linear , logistic , KNN algorithm etc. only last if the dataset is still imbalanced use Balancing the dataset.

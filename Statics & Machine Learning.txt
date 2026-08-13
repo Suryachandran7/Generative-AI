@@ -571,7 +571,7 @@ cardio.head()
 cardio1=cardio.copy()
 cardio2=st.zscore(cardio1)
 
-st.norm.interval(alpha=0.95,loc=np.mean(cardio["chol"]),scale=st.sem(cardio["chol"])) -> this will calculate the confidence level "sem" will take the margin of error, "loc" mean or median value and "scale" will be standard deviation 
+st.norm.interval(alpha=0.95,loc=np.mean(cardio["chol"]),scale=st.sem(cardio["chol"])) -> this will calculate the confidence level "sem" will take the margin of error, "loc" mean or median value and "scale" will be standard deviation
 Confidence level formula is CI = Mean + or - Margin of errors
 
 using t score calculating the CI:
@@ -581,7 +581,7 @@ st.t.interval(alpha=0.95,df=len(data5)-1,loc=np.mean(data5),scale=st.sem(data5))
 if the dataset size is > 30 use Z score else use t score
 
 Probability Sampling Methods:
-Type of Probability Sampling Methods: 
+Type of Probability Sampling Methods:
 1. Simple random sampling -> randomly taking sample data
 2. Systematic random sample -> is similar to simple random sampling, but instead of randomly generating numbers, individuals are chosen at regular intervals. ex: If 10th person on the
 list is selected (6, 16, 26, 36, and so on)
@@ -594,7 +594,7 @@ Difference between stratified sampling and cluster sampling:
  In stratified sampling it is mandatory toselect from all the sub-groups.
 
 population and sampling:
-import pandas as pd 
+import pandas as pd
 school={'ID':[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],'NAME':["Mayank","Anu","Geeta","Ramesh","Prakash","Swati","Sweta",'Ravi','Raju',"Archana","Madhuri","Irfan","Sabina",'Alex','Rohan','Kiran','Jack',"Anjali","Alok","Preeti"],
          'MATH':[70,55,70,89,90,76,44,50,70,88,60,70,80,77,78,59,77,98,99,99],
          'ENGLISH':[71,90,70,55,60,70,78,98,67,87,78,79,45,76,33,76,79,78,78,99],'COMPUTER':[98,90,76,55,65,70,88,98,67,84,90,99,45,88,83,76,99,78,77,97],'AWARD':[0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1]}
@@ -616,7 +616,7 @@ df.sample(
 # n is the no. of sample
 #frac= fraction 10%   frac=0.1
 #replace- replacement allowed , repetation allowed
-#weight:-by default each observation is equally weighted. 
+#weight:-by default each observation is equally weighted.
 #we can assign weighted to individual observation.
 #random_state:-reproduce the same sample
 
@@ -636,7 +636,7 @@ Y=df["AWARD"] -> Y is depent variable
 print(X) -> (20, 4)
 print(Y) -> (20,)
 
-splitting the data in training and testing 
+splitting the data in training and testing
 from sklearn.model_selection import train_test_split -> import this for split training and test dataset
 X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.20) -> make 20% to test data and remaing 80% to training data
 print(X_train.shape) -> (16,4)
@@ -646,8 +646,8 @@ print(Y_test.shape) -> (4,)
 
 cardio_cascular dataset central limit theorem:
 Central limit theorem
-The Central Limit Theorem (CLT) is a statistical theory that indicate that the mean and standard deviation derived from a sample, will accurately approximate the mean and standard deviation of the population. 
-The minimum number of members in the sample is 30 or more than 30. 
+The Central Limit Theorem (CLT) is a statistical theory that indicate that the mean and standard deviation derived from a sample, will accurately approximate the mean and standard deviation of the population.
+The minimum number of members in the sample is 30 or more than 30.
 is 30
 
 cardio1=pd.read_csv("Cardio_vascular.csv")
@@ -687,7 +687,7 @@ no. of element in the sample >=30
 Probability Distribution:
 Type of distribution:
 dataset can consist of two types of data elements:
-Numerical(integers, float, etc): This type of data can 
+Numerical(integers, float, etc): This type of data can
 further be categorized into two types:
 
 Discrete: This type of numerical data can be only a certain value like the number of apples in the basket and number of people in a team, etc.
@@ -696,22 +696,22 @@ Continuous: This type of numerical data can be real or fractional values, for ex
 
 Categorical (names, labels, etc): It can be the categories such as gender, state, etc.
 
-There are different types of probability distribution for machine learning projects. 
+There are different types of probability distribution for machine learning projects.
 This is important because certain ML models assume specific probability distribution of the underlying data to work efficiently so this knowledge will help us to choose the right model. Also, the knowledge of probability distribution will help to understand the characteristics of data during the exploratory data analysis (EDA) phase.
 
 probability mass function:
-Using the discrete random variables from the dataset 
+Using the discrete random variables from the dataset
 we can calculate the probability mass function PMF
 
 probability density function PDF:
-using the continuous random variable we can calculate the probability density function PDF.  
+using the continuous random variable we can calculate the probability density function PDF.
 
 Probability density function:also call it continuous probability distribution.
 
 Normal (Gaussian) Distribution:
 The Normal Distribution is one of the most important distributions.
 
-Most of the real-world scenarios can be represented with Normal 
+Most of the real-world scenarios can be represented with Normal
 Probability Distribution.
 
 The normal distribution can be mathematically represented as, where µ is mean and σ is the standard deviation.
@@ -727,12 +727,12 @@ sns.distplot(random.normal(size=1000), hist=False)
 plt.show()
 
 probability mass function:
-Using the discrete random variables from the dataset 
+Using the discrete random variables from the dataset
 we can calculate the probability mass function PMF
 
 Bernoulli Distribution:
-A Bernoulli Distribution denotes the random probability of an event that only has two possible discrete outcomes like 0 and 1. 
-The tossing of a coin is a Bernoulli event since it has only two possible discrete outcomes – Head (i.e. 1) and Tail (i.e. 0). 
+A Bernoulli Distribution denotes the random probability of an event that only has two possible discrete outcomes like 0 and 1.
+The tossing of a coin is a Bernoulli event since it has only two possible discrete outcomes – Head (i.e. 1) and Tail (i.e. 0).
 Hence it follows the Bernoulli probability distribution.
 
 from scipy.stats import bernoulli
@@ -783,7 +783,7 @@ binom.cdf(5,20,0.5)
 Ramesh flips a fair coin 5 times. What is the probability that the coin lands on heads 2 times or fewer?
 binom.cdf(2,5,0.5)
 
-It is known that 80% of individuals support a Traffic Rules. 
+It is known that 80% of individuals support a Traffic Rules.
 If 10 individuals are randomly selected, what is the probability that between 4 and 6 of them support the Traffic Rules?
 calculate binomial probability
 binom.cdf(k=6, n=10, p=0.8) - binom.cdf(k=3, n=10, p=0.8)
@@ -806,7 +806,7 @@ sns.distplot(random.poisson(lam=2, size=1000), kde=False)
 plt.show()
 
 Example 1: Probability Equal to Some Value
-A store sells 3 apples per day on average. What is the probability that they will sell 5 apples on a given day? 
+A store sells 3 apples per day on average. What is the probability that they will sell 5 apples on a given day?
 from scipy.stats import poisson
 #calculate probability
 poisson.pmf(k=5, mu=3)
@@ -815,7 +815,7 @@ A pizza counter 50 customer per hour on average. What is the probability that 10
 poisson.pmf(k=100, mu=50)
 
 Example 2: It is known that a certain website makes 10 sales per hour. In a given hour, what is the probability that the site makes exactly 8 sales?
-Answer: Using the Poisson Distribution Calculator with λ = 10 and x = 8, we find that P(X=8) 
+Answer: Using the Poisson Distribution Calculator with λ = 10 and x = 8, we find that P(X=8)
 poisson.pmf(k=8, mu=10)
 
 Example 3: Probability Less than Some Value
@@ -827,7 +827,7 @@ Answer: Using the Poisson Distribution Calculator with λ = 4 and x = 4, we find
 poisson.cdf(k=4, mu=4)
 
 Example 5: Probability Greater than Some Value
-A certain store sells 15 Mobile Phone per day on average. 
+A certain store sells 15 Mobile Phone per day on average.
 What is the probability that this store sells more than 20 Mobile Phone in a given day?
 1-poisson.cdf(k=20, mu=15)
 
@@ -924,7 +924,7 @@ There are 5 professors, 4 Doctors, 3 Teachers, 2 Bankers.
 Make a 5-member committee: -
 There must be 1 professor, 1 teacher, 2 Banker, 1 Doctor.
 How many different committee, we can make?
-5c1 * 4c1 * 3c1 * 2c2 
+5c1 * 4c1 * 3c1 * 2c2
 
 PROBABILITY
 Randomness
@@ -1148,7 +1148,7 @@ cov
 
 Visualizing the relationships between columns Before you do any cleanup, it would be useful to visualizing the relationships between the various columns using a pair plot (using the Seaborn module):
 
-Seaborn Pairplot uses to get the relation between each and every  variable present in Pandas DataFrame. It works like a seaborn scatter plot but it plot only two variables plot and sns pairplot plot the pairwise plot of multiple features/variable in a grid format. 
+Seaborn Pairplot uses to get the relation between each and every  variable present in Pandas DataFrame. It works like a seaborn scatter plot but it plot only two variables plot and sns pairplot plot the pairwise plot of multiple features/variable in a grid format.
 
 import seaborn as sns
 sns.pairplot(df)
@@ -1170,14 +1170,14 @@ corr
 sns.heatmap(corr,annot=True) ->annot shows values in heatmap
 
 Spearman rank correlation:
-Spearman rank correlation: Spearman rank correlation is a non-parametric test that is used to measure the degree of association between two variables.  
+Spearman rank correlation: Spearman rank correlation is a non-parametric test that is used to measure the degree of association between two variables.
 The Spearman rank correlation test does not carry any assumptions about the distribution of the data and is the appropriate correlation analysis when the variables are measured on a scale at least ordenal
 
 Types of research questions a Spearman Correlation can examine:
 Is there a statistically significant relationship between participants’ level of education (high school, bachelor’s, or graduate degree) and their starting salary?
 Is there a statistically significant relationship between horse’s finishing position a race and horse’s age?
 
-Assumptions: 
+Assumptions:
 The assumptions of the Spearman correlation are that data must be at least ordinal and the scores on one variable must be monotonically related to the other variable.
 
 corr1=df.corr(method="spearman")
@@ -1186,7 +1186,7 @@ corr1
 Kendall rank correlation:
 The Kendall rank correlation coefficient does not assume a normal distribution of the variables and is looking for a monotonic relationship between two variables.
 Kendall rank correlation: Kendall rank correlation is a non-parametric test that measures the strength of dependence between two variables.
-Two variables are monotonic correlated if any greater value of the one variable will result in a greater value of the other variable. 
+Two variables are monotonic correlated if any greater value of the one variable will result in a greater value of the other variable.
 If the variables is negatively monotonic correlated, then it is opposite.
 
 corr2=df.corr(method="kendall")
@@ -1201,7 +1201,7 @@ Point-biserial correlation:
 strength of the relationship between two variables.
 Your variables of interest should include one continuous and one binary variable.
 Height vs Gender
-Test reading vs Disease 
+Test reading vs Disease
 
 it is like one column having continous values and another column has category
 
@@ -1221,7 +1221,7 @@ output: PointbiserialrResult(correlation=-0.6115729628358616, pvalue=0.045564686
 variance_inflation_factor:
 It is used to find before correlation we can check column more correlation
 As VIF does not tell which pair of independent variables are correlated, you can run a correlation analysis to know which variables are highly correlated.
-"VIF work on numerical value columns only if it is string convert to numerical and encode the data" 
+"VIF work on numerical value columns only if it is string convert to numerical and encode the data"
 
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 import statsmodels.api as sm
@@ -1267,7 +1267,7 @@ MinMaxScaler is mostly used in image preprocessing
   PCA PREFER STANDARIZARION.IMPACT OF OUTLIER IS LOW.
 
 X=df.drop("BP",axis=1) ->Before Scaling drop the dependent variable column
-Y=df["BP"] 
+Y=df["BP"]
 
 Standard Scaler:
 from sklearn.preprocessing import StandardScaler
@@ -1284,13 +1284,13 @@ Sklearn its main scaler, the StandardScaler, uses a strict definition of standar
 x_scaled = (x — u) / s
 
 MinMax Scaler:
-The MinMaxScaler transforms features by scaling each feature to a given range. This range can be set by specifying the feature_range parameter (default at (0,1)). This scaler works better for cases where the distribution is not Gaussian or the standard deviation is very small. 
+The MinMaxScaler transforms features by scaling each feature to a given range. This range can be set by specifying the feature_range parameter (default at (0,1)). This scaler works better for cases where the distribution is not Gaussian or the standard deviation is very small.
 However, it is sensitive to outliers, so if there are outliers in the data, you might want to consider another scaler.
 
 x_scaled = (x-min(x)) / (max(x)–min(x))
 
-Importing and using the MinMaxScaler works — 
-just as all the following scalers — in exactly the same way as the 
+Importing and using the MinMaxScaler works —
+just as all the following scalers — in exactly the same way as the
 StandardScaler. The only difference sits in the parameters on initiation of a new instance.
 
 from sklearn.preprocessing import MinMaxScaler
@@ -1308,8 +1308,8 @@ The MaxAbsScaler works very similarly to the MinMaxScaler but automatically scal
 
 x_scaled = x / max(abs(x))
 
-#abs (x) function returns the absolute value of the argument x 
-that can be an integer, float, or object implementing the __abs__ () function. 
+#abs (x) function returns the absolute value of the argument x
+that can be an integer, float, or object implementing the __abs__ () function.
 For a complex number, the function returns its magnitude. The absolute value of any numerical input argument -x or +x is the corresponding positive value +x.
 
 from sklearn.preprocessing import MaxAbsScaler
@@ -1319,13 +1319,13 @@ X_scaled3=sclaer2.fit_transform(X)
 X_scaled3
 
 SPARSE DATA:
-Missing data in machine learning is a type of data that contains null values, whereas Sparse data is a type of data that does not contain the actual values of features; it is a dataset containing a high amount of zero or null values. 
+Missing data in machine learning is a type of data that contains null values, whereas Sparse data is a type of data that does not contain the actual values of features; it is a dataset containing a high amount of zero or null values.
 It is a different thing than missing data.
 
-Sparse datasets with high zero values can cause problems like over-fitting in the machine learning models and several other problems. 
+Sparse datasets with high zero values can cause problems like over-fitting in the machine learning models and several other problems.
 That is why dealing with sparse data is one of the most hectic processes in machine learning.
 
-1. Sparse data is completely different from missing data. 
+1. Sparse data is completely different from missing data.
 It is a form of data that contains a high amount of zero values.
 
 2. The sparse data should be handled properly to avoid problems like time and space complexity, lower performance of the models, over-fitting, etc.
@@ -1333,9 +1333,9 @@ It is a form of data that contains a high amount of zero values.
 3. Dimensionality reduction, converting the sparse features into dense features and using algorithms like entropy-weighted k means, which are robust to sparsity, can be the solution while dealing with sparse datasets.
 
 Robust Scaler:
-If your data contains many outliers, scaling using the mean and standard deviation of the data is likely to not work very well. In these cases, you can use the RobustScaler. It removes the median and scales the data according to the quantile range. 
-By default, the scaler uses the Inter Quartile Range (IQR), which is the range between the 1st quartile and the 3rd quartile. 
-The quantile range can be manually set by specifying the quantile_range parameter when initiating a new instance of the RobustScaler. 
+If your data contains many outliers, scaling using the mean and standard deviation of the data is likely to not work very well. In these cases, you can use the RobustScaler. It removes the median and scales the data according to the quantile range.
+By default, the scaler uses the Inter Quartile Range (IQR), which is the range between the 1st quartile and the 3rd quartile.
+The quantile range can be manually set by specifying the quantile_range parameter when initiating a new instance of the RobustScaler.
 For example , we transform feature scaling using an quantile range from 10% till 90%.
 
 from sklearn.preprocessing import RobustScaler
@@ -1368,7 +1368,7 @@ applying the .astype("category").cat.codes   function on Education column:
 df1.Education=df1.Education.astype("category").cat.codes
 df1.head()
 
-after apply the .astype("category").cat.codes function... 
+after apply the .astype("category").cat.codes function...
 #we found the values has been assigned as per alphabet 0,1,2,3....20 as per requirement.
 # as value 20 is much higher than 0, to avoid this problem another solution is as below:
 
@@ -1385,7 +1385,7 @@ df5.head()
 
 Imporntant:-
 Linear Regression:
-Problem statement: To find the effect of different type of Advertisement on Sales  
+Problem statement: To find the effect of different type of Advertisement on Sales
 # import the basic library
 import os
 import numpy as np
@@ -1402,7 +1402,7 @@ df1.info() ->to find the information of dataset
 
 To check the normal distribution status of data.:
 df1.skew()
-df1.kurtosis() 
+df1.kurtosis()
 ->skewness and kurtosis range -3 to +3 , it as APPROXIMATELY normally distributed.
 
 create cbrt-transformed data:
@@ -1410,7 +1410,7 @@ df1 = np.cbrt(df1) _> it used for normal distribution
 
 DATA PROCESSING STEP:
 1)MISSING DATA:
-calculate the percentage of missing value 
+calculate the percentage of missing value
 df1.isnull().sum()/len(df1)*100
 df1.isnull().sum()
 df.dropna(inplace=True)  ->will drop all rows with NaN in any column, but this approach is not good.
@@ -1418,7 +1418,7 @@ df.dropna(inplace=True)  ->will drop all rows with NaN in any column, but this a
 handling missing value :- mean, mode, median approach:
 df1["TV"]=df1["TV"].fillna(df1["TV"].median()) ->Median approach because it has outliers
 df1["Radio"]=df1["Radio"].fillna(df1["Radio"].mean()) ->Mean approach
-we use Mode for classification 
+we use Mode for classification
 
 looking for outliers:
 sns.boxplot(y="TV", data=df1) ->in the graph show dots it is outliers
@@ -1632,7 +1632,7 @@ Max_error
 Mean Absolute Error
 Mean Squared Error
 Median Squared Error
-R Squared 
+R Squared
 
 Max_error: maximum difference occurred between data:
 from sklearn.metrics import max_error
@@ -1645,7 +1645,7 @@ Mean Absolute Error : mean absolute Difference between the data and its average
 from sklearn.metrics import mean_absolute_error
 mean_absolute_error(Y_predict, Y_test)
 
-Mean Squared Error:It is as similar to the above metric where in Mean Squared Error we will be calculating the square of the difference between the predicted and the original data. 
+Mean Squared Error:It is as similar to the above metric where in Mean Squared Error we will be calculating the square of the difference between the predicted and the original data.
 from sklearn.metrics import mean_squared_error
 #mean_squared_error(original_data,predicted_data)
 mean_squared_error(Y_predict, Y_test)
@@ -1670,7 +1670,7 @@ VIF['feature'] = X.columns
 VIF['VIF']     = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
 VIF
 
-The method of Ordinary Least Squares(OLS) is most widely used model due to its efficiency. This model gives best approximate of true population regression line. The principle of OLS is to minimize the 
+The method of Ordinary Least Squares(OLS) is most widely used model due to its efficiency. This model gives best approximate of true population regression line. The principle of OLS is to minimize the
 square of errors ( ∑ei2 ).
 WE WILL DO REGRESSION MODEL EVALUATION BY USING OLS METHOD WHICH IS VERY RELIABLE .
 IT WILL GENERATE R SEQUARE VALUE AND OTHER VALUES.
@@ -1691,8 +1691,8 @@ Explaination of OLS Summary report:
 print("Training dataset \n", OLS_training.summary())
 
 output:
-Training dataset 
-                             OLS Regression Results                            
+Training dataset
+                             OLS Regression Results
 ==============================================================================
 Dep. Variable:                  Sales   R-squared:                       0.903
 Model:                            OLS   Adj. R-squared:                  0.901
@@ -1701,8 +1701,8 @@ Date:                Mon, 09 Jan 2023   Prob (F-statistic):           1.25e-73
 Time:                        14:46:08   Log-Likelihood:                 133.61
 No. Observations:                 150   AIC:                            -259.2
 Df Residuals:                     146   BIC:                            -247.2
-Df Model:                           3                                         
-Covariance Type:            nonrobust                                         
+Df Model:                           3
+Covariance Type:            nonrobust
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
@@ -1720,8 +1720,8 @@ Kurtosis:                      13.697   Cond. No.                         37.5
 Notes:
 [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 
-No. Observations: 150  # size of our sample    
-Df Residuals: 146                              
+No. Observations: 150  # size of our sample
+Df Residuals: 146
 
 #Degrees of freedom RESIDUAL = N – K
 Where, N = sample size(no. of observations) and  K = number of variables + 1
@@ -1729,12 +1729,12 @@ DF residual =N-K
 N=150
 K=3+1=4
 DF RESIDUAL=150-4=146
-        
+ 
 Df Model: 3   # DF of Model=n-1=4-1=3
 
 #R square
 # Adjusted R square
-# Fstatistics:-F test tells the goodness of fit of a regression. 
+# Fstatistics:-F test tells the goodness of fit of a regression.
 The test is similar to the t-test or other tests we do for the hypothesis.
 #Durbin-Watson
 
@@ -1850,7 +1850,7 @@ What is Multicollinirity ? ->when the two column doing same thing that is Multic
 if i did not make Multicollinirity drop column it will not make any impact on the accuracy
 
 Logistic Regression Cardio Vascular prediction:
-cardiovascular diseases are the first leading cause of death across the world as well. World Health Organization has estimated that the mortality rate caused by heart diseases will mount to 23 million cases by 2030. Hence, the use of data mining algorithms could be useful in predicting coronary artery diseases. 
+cardiovascular diseases are the first leading cause of death across the world as well. World Health Organization has estimated that the mortality rate caused by heart diseases will mount to 23 million cases by 2030. Hence, the use of data mining algorithms could be useful in predicting coronary artery diseases.
 
 Objective:
 The objective of this research is to build classifiers to predict whether a person has cardiovascular disease based on their medical test, age, and gender also also to identify which test is more reliable in determining cardiovascular disease.
@@ -1860,7 +1860,7 @@ Knowledge of the risk factors associated with heart disease helps health care pr
 # note:-Here family History, Other habits like Smoking,Alcohal etc are not inclused.
 
 Method:
-Collected patient data from four national hospital. Two from hospital in USA and two from Europe. 
+Collected patient data from four national hospital. Two from hospital in USA and two from Europe.
 
 # import the basic library
 import os
@@ -1930,7 +1930,7 @@ df.corr()
 plt.figure(figsize=(10,7))
 sns.heatmap(df.corr(),annot=True)
 
-# split the data in training and testing 
+# split the data in training and testing
 from sklearn.model_selection import train_test_split
 X_train,X_test,Y_train,Y_test=train_test_split(X_scaled_df,Y,test_size=0.2,random_state=101)
 
@@ -1950,7 +1950,7 @@ accuracy_score(Y_train,Y_predict_train)
 # testing accuracy:
 accuracy_score(Y_test,Y_predict_test)
 
-split the data independent and dependent columns as x and y 
+split the data independent and dependent columns as x and y
 
 make x independent split training and testing as x_train and x_test
 
@@ -2003,17 +2003,17 @@ Total misclassification rate: The percentage of total incorrect classifications 
 
 from sklearn.metrics import classification_report,confusion_matrix,accuracy_score
 import seaborn as sns
-import matplotlib.pyplot as plt     
+import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 
-y_test=[1,1,1,0,0, 
+y_test=[1,1,1,0,0,
         1,1,1,1,0,
-       1,1,1,1,1, 
+       1,1,1,1,1,
       1,1,1,1,1,]
 # In true data set 17 patient has disease, 3 patient has NO Disease
-pred=[1,1,1,0,0, 
+pred=[1,1,1,0,0,
         1,1,1,1,1,
-       1,1,1,1,1, 
+       1,1,1,1,1,
       0,0,0,0,0,]
 # In pred dataset 12 patient has disease predicted correctly. TP=12
 # 2 patient has No disease correct predicted as No disease. TN=2.
@@ -2028,7 +2028,7 @@ sns.heatmap(cm30, annot=True, fmt='g',cmap='rocket_r');#cmap='rocket_r' for colo
 
 # labels, title and ticks
 ax.set_xlabel('Predicted labels');
-ax.set_ylabel('True labels'); 
+ax.set_ylabel('True labels');
 
 ax.set_title('Confusion Matrix');
 
@@ -2102,7 +2102,7 @@ How to select the optimal value of k?
  Prefer odd k values, as there are chances of tie in even values.
  K should not be too small.
  Thumb rule: k should be generally sqrt(n), where n denotes the total number of data points
- Further, one can try different values of k, and then observe the evaluation metrics to decide upon the best value of k 
+ Further, one can try different values of k, and then observe the evaluation metrics to decide upon the best value of k
 
 
 Python code:-
@@ -2207,7 +2207,7 @@ from sklearn.preprocessing import LabelEncoder
 encoder=LabelEncoder()
 X20["BusinessTravel"]=encoder.fit_transform(X20["BusinessTravel"]) -> make label encoding
 
-X20["Attrition"]=X20["Attrition"].map({"Yes":1,"No":0}) -> changing the depended variable using map 
+X20["Attrition"]=X20["Attrition"].map({"Yes":1,"No":0}) -> changing the depended variable using map
 
 X20.corr() ->correlation
 
@@ -2244,7 +2244,7 @@ Y = X200['Attrition']
 Y.value_counts() -> this output is imbalanced
 output: 0    1233
        1     237
-Name: Attrition, dtype: int64 
+Name: Attrition, dtype: int64
 
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.25, stratify=Y, random_state = 0)
 
@@ -2254,13 +2254,381 @@ like if chemistry having 200 no of questions and maths having 800 no of question
 
 Balancing the DataSet:
 # import SMOTE module from imblearn library
-#!pip install imblearn 
+#!pip install imblearn
 #(if you don't have imblearn in your system)
 
-three popular methods :- 
+three popular methods :-
 Undersampling  -> if chemistry having 200 no of questions and maths having 800 no of question it is imbalanced data set then reduces the maths question randomly to 200
 Oversampling -> if chemistry having 200 no of questions and maths having 800 no of question it is imbalanced data set then increase the chemistry question 800 using duplicate dataset
-SMOTE sampling -> if chemistry having 200 no of questions and maths having 800 no of question it is imbalanced data set then increase the chemistry question 800 using make similar data like KNN method 
+SMOTE sampling -> if chemistry having 200 no of questions and maths having 800 no of question it is imbalanced data set then increase the chemistry question 800 using make similar data like KNN method
 
 Balancing dataset only applied on training dataset.
 after doing all option linear , logistic , KNN algorithm etc. only last if the dataset is still imbalanced use Balancing the dataset.
+
+smote approach:
+X200.head()
+X = X200.drop(['Attrition'],axis=1)
+Y = X200['Attrition']
+sc1 = StandardScaler()
+X = sc1.fit_transform(X)
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.30, stratify=Y, random_state = 0)
+X_train.shape
+Y_train.value_counts() ->output: 0    863
+                               1    166
+                               Name: Attrition, dtype: int64
+
+from imblearn.over_sampling import SMOTE
+sm=SMOTE()
+X_train_smote, Y_train_smote = sm.fit_resample(X_train, Y_train)
+
+print("Bofore balancing X_train", X_train.shape)
+print("*******"*5)
+print("Bofore balancing Y_train", Y_train.shape)
+print("*******"*5)
+print(" no. of different class before balancing \n", Y_train.value_counts())
+print("*******"*5)
+outpt:Bofore balancing X_train (1029, 30)
+***********************************
+Bofore balancing Y_train (1029,)
+***********************************
+ no. of different class before balancing
+ 0    863
+1    166
+Name: Attrition, dtype: int64
+***********************************
+
+print("After balancing X_train",X_train_smote.shape)
+print("*******"*5)
+print("After balancing Y_train",Y_train_smote.shape)
+print("*******"*5)
+print("After SMOTE method Dependent value counts")
+Y_train_smote.value_counts()
+output:After balancing X_train (1726, 30)
+***********************************
+After balancing Y_train (1726,)
+***********************************
+After SMOTE method Dependent value counts
+0    863
+1    863
+Name: Attrition, dtype: int64
+
+print(classification_report(Y_test,pred))
+output:               precision    recall  f1-score   support
+
+                           0       0.91                 0.53           0.67            370
+                           1       0.23                 0.73           0.35              71
+
+    accuracy                                                          0.56            441
+   macro avg              0.57                0.63           0.51            441
+weighted avg          0.80                0.56           0.62            441
+
+print(accuracy_score(Y_test, pred)) ->0.564625850340136
+
+UNDERSAMPLING APPROACH:
+from imblearn.under_sampling import RandomUnderSampler
+under=RandomUnderSampler()
+X_train_under,Y_train_under=under.fit_resample(X_train,Y_train)
+print(X_train_under.shape)
+print(Y_train_under.shape)
+print("After Random Undersampling method")
+Y_train_under.value_counts()
+output:(332, 30)
+(332,)
+After Random Undersampling method
+0    166
+1    166
+Name: Attrition, dtype: int64
+
+print(classification_report(Y_test,pred))
+output:
+              precision    recall  f1-score   support
+
+           0       0.91      0.76      0.83       370
+           1       0.33      0.61      0.43        71
+
+    accuracy                           0.74       441
+   macro avg       0.62      0.69      0.63       441
+weighted avg       0.82      0.74      0.77       441
+
+print(accuracy_score(Y_test, pred))-> 0.7392290249433107
+
+OVERSAMPLING APPROACH:
+from imblearn.over_sampling import RandomOverSampler
+over=RandomOverSampler()
+X_train_over,Y_train_over=over.fit_resample(X_train,Y_train)
+print(X_train_over.shape)
+print(Y_train_over.shape)
+print("After Random Over sampling Method")
+Y_train_over.value_counts()
+output:
+(1726, 30)
+(1726,)
+After Random Over sampling Method
+0    863
+1    863
+Name: Attrition, dtype: int64
+
+print(classification_report(Y_test,pred))
+output:
+              precision    recall  f1-score   support
+
+           0       0.92      0.78      0.85       370
+           1       0.37      0.66      0.47        71
+
+    accuracy                           0.76       441
+   macro avg       0.65      0.72      0.66       441
+weighted avg       0.83      0.76      0.79       441
+
+print(accuracy_score(Y_test, pred))->0.764172335600907
+
+Support vector machines (SVM):
+SVM Most popular, Versatile MLA Used in Regression & Classification
+ Preferred for Medium and small sized dataset.
+ It separates data in two components using hyper plane by maximizing themargin ( Also called large marginal classifier).
+
+SVM mostly used in classification
+
+ Support Vectors are simply the coordinates of individual observation.
+ Dotted line is hyperplane, separating blue and pink classes balls.
+
+Hyper-plane:
+It is plane that linearly divide the n-dimensional data points in two components.
+In case of 2D, hyperplane is line,
+in case of 3D it is plane.
+It is also called as n-dimensional line.
+
+Hyperplane: A-line classify with highest margin
+
+Kernel means approach
+There are different kernel functions available:
+ linear
+ Gaussian (RBF kernel- Radial Basis Function)
+ Polynomial
+ Sigmoid
+
+
+Kernel functions. - transform non-linear spaces into linear spaces. It transforms data into higher dimension so that the data can be classified.
+
+There are various options associated with SVM training; like changing kernel, gamma and C value.
+
+kernel: various options available - “linear”,“rbf”,”poly” and sigmoid (default is “rbf”). Here “rbf” and “poly” are useful for non-linear hyper-plane.
+
+gamma: Kernel coefficient for ‘rbf’, ‘poly’ and ‘sigmoid’. Higher the value of gamma, will try to exact fit the as per training data set i.e. generalization error and cause over-fitting problem. gamma different gamma values like 1, 10 or 100.
+
+C: Penalty parameter C of the error term. It also controls the trade-off between smooth decision boundaries and classifying the training points correctly.
+
+Pro & Cons associated with SVM: -
+Advantage: -
+ Works really well with margin of separation.
+ Effective in high dimensional space
+ Accurate results.
+
+ Useful for both linearly separable and non-linearly separable data.
+
+Disadvantages: -
+ It doesn’t perform well when we have largedataset because the required training time is very high.
+Applications of SVM
+ Sentiment analysis
+ Spam Detection
+ Handwritten digit recognition
+ Image recognition
+
+from sklearn.svm import SVC #"Support vector classifier"
+from sklearn.svm import SVR #"Support vector Regressor"
+
+# Building a Support Vector Machine on train data
+svc_model = SVC(C=1, kernel='linear', gamma= 100)
+svc_model.fit(X_train, Y_train)
+prediction = svc_model.predict(X_test)
+
+SVM help us to non-linear distribution data to linear distribution
+
+Support vector Machine:
+#working on imbalance dataset
+from sklearn.svm import SVC #"Support vector classifier"
+ 
+# Building a Support Vector Machine on train data
+svc_model = SVC(C=1, kernel='linear', gamma= 100)
+svc_model.fit(X_train, Y_train)
+ 
+prediction = svc_model.predict(X_test)
+
+# check the accuracy on the training set
+print(svc_model.score(X_train, Y_train))
+print(svc_model.score(X_test,Y_test))
+
+score will in all model to check accuracy
+
+in regression the accuracy is important
+in classification the recall ,precision is important also the accuracy is important
+
+# In healthcare Recall is important.
+#In Loan approval sector Recall is important.
+
+#The opposite scenario is spam classification, where false negatives
+#are much more tolerable than false positives.
+#It doesn't matter if you occasionally find a spam email in your inbox,
+#but having good emails classified as spam can be problematic.
+#This scenario favors precision over recall.
+
+CROSS VALIDATION:
+from sklearn.model_selection import cross_val_score
+acc=cross_val_score(estimator=svc_model,X=X_train,y=Y_train,cv=10)
+acc
+
+we cannot test the model 10 times for that we use cross validation
+
+acc.mean()
+
+Decision Tree Algorithm:
+From classrooms to corporate, most important is decision trees.
+
+Mathematics behind decision tree is very easy to understand compared to other machine learning algorithms.
+Decision tree is also easy to interpret and understandcompared to other ML algorithms.
+
+ Non-parametric Supervised Machine Learning Algorithm
+Uses a set of rules to make decisions, similarly to how humans make decisions.
+A rule is a conditional statement that can easily be understood by humans and easily used within a database to identify a set of records.
+
+parametric means we should below the rules like example it should normally distributed.
+Non-parametric means there is no rule.
+
+Decision trees can perform both classification and regression tasks.
+
+Terminology:
+1.Root Node: It represents entire population or sample and this further gets divided into two or more homogeneous sets.
+2. Splitting: It is a process of dividing a node into two or more sub-nodes.
+3. Decision Node: When a sub-node splits into further sub-nodes, then it is called decision node. This ultimately leads to a prediction.
+4. Leaf/ Terminal Node: Nodes (no further split) is called Leaf or Terminal node.
+5. Pruning: When we reduce the size of decision trees by removing nodes (opposite of Splitting), the process is called pruning.
+6. Branch / Sub-Tree: A sub section of decision tree is called branch or sub-tree.
+
+you start question from root node then move through the tree branches according to which groups you belong to until you reach a leaf node.
+
+Mathematics behind Decision Tree:
+
+1. Flow of information through the Decision Tree
+2. How does Decision Trees select which variable to split on at decision nodes?
+3. How does it decide that the tree has enough branches and that it should stop splitting?
+
+Variables are selected on a statistical criterion which is applied at each decision node.
+
+variable selection criterion in Decision Trees can be done via two approaches: -
+1. Entropy and Information Gain
+2. Gini Index
+
+Both criteria are broadly similar and seek to determine which variable would split the data to lead to the underlying child nodes being most homogenous or pure.
+
+Entropy:
+Entropy is amount of information is needed to accurately describe some sample. So if sample is homogeneous, "means all the element are similar than Entropy is 0, else if sample is equally divided than entropy is maximum 1". Mathematically it is written as ,
+
+Where the pi is the probability of randomly selecting an example in class i.
+
+Gini index / Gini impurity:
+Gini index is measure of inequality in sample. It has value between 0 and 1. Gini index of value 0 means sample are perfectly homogeneous and all element are similar, whereas, Gini index of value 1 means
+maximal inequality among elements. It is sum of the square of the probabilities of each class. It is illustrated as, i is number of classes
+
+The Entropy and Information Gain method focuses on purity and impurity in a node.
+
+The Gini Index or Impurity measures the probability for a random instance being misclassified when chosen randomly.
+
+" Entropy and Information Gain & Gini Index using to find root node which column having minimum value."
+
+overfitting & underfitting:
+overfitting means good in training and not good in testing, where the deference betwoon training and testing is 10% it is overfitting
+underfitting means not good in both training and testing.
+
+there is a concept "Bias and Variance"
+
+Bias is associated with training.
+Variance is associated with testing.
+
+for overfitting:
+98% -> low bias
+86% -> high Variance
+
+for underfitting
+80% -> high Bias
+78% -> high Variance
+
+Decision Tree Practice: Jan_23_Imp_Wine_Quality_Prediction.ipynb
+
+Random Forest Classifier:
+Random Forest use Decision Tree Algorithm
+
+rfc = RandomForestClassifier() ->in this hyperparameters is important
+#RandomForestRegressor for regression
+rfc.fit(X_train, y_train)
+pred_rfc = rfc.predict(X_test)
+
+#Let's see how our model performed
+print(classification_report(y_test, pred_rfc))
+
+accuracy = accuracy_score(y_test,pred_rfc)
+print(accuracy)
+
+Ensemble learning:
+ In real life When making crucial decisions, everyone consider the help of numerous specialists rather than relying on the advice of a single person.
+ Ensemble learning is the same way of working. Ensemble learning is the process of combining numerous individual model to produce a better model.
+ The Ensemble model has better accuracy and reliability. Ensemble Learning is a method to predict by fusing the salient properties of two or more models.
+
+Type of Ensemble Learning: -
+1.Bagging technique
+2.Boosting technique
+3.Voting technique ->it will apply no of algorithm for example linear,logistic,KNN,SVM etc choose the best
+
+1. Bagging
+The Bagging ensemble technique (“bootstrap aggregating”)
+
+Random subsets of a dataset are created using replacement, (meaning that the same data point may be present in several subsets).
+
+These subsets are called “bootstrap sampling.”These subsets are now treated as independent datasets, on which Machine Learning algorithms applied.
+
+There is an aggregation mechanism used to compute the final prediction (like averaging, weighted averaging, etc.).
+
+Bagging ensemble mechanism.
+
+Parallel stream of processing occurs. "The main aim of the bagging method is to reduce variance in the ensemble predictions".
+Popular ensemble methods:
+ Bagged Decision Trees
+ Random Forest Classifiers
+ Extra Trees
+
+Bagging vs Random forest: -
+Random forest take data sample row wise and column wise.
+Bagging only take data sample only row wise.
+
+OOB (out of bag data):-
+it will some data in reserve and test after the algorithm trained
+
+2. Boosting
+The boosting ensemble mechanism works different from the bagging mechanism. Here, instead of parallel processing of data, sequential processing of the dataset occurs.
+The first classifier is fed with the entire dataset,and the predictions are analyzed.
+
+The instances where Classifier-1 fails to produce correct predictions (that are samples near the decision boundary of the feature space) are fed to the second classifier.
+This is done so that Classifier-2 can specifically focus on the problematic areas of feature space and learn an appropriate decision boundary.
+
+Similarly, further steps of the same idea are employed, and then the ensemble of all these previous classifiers is computed to make the final prediction on the test data.
+
+Boosting ensemble mechanism "The main aim of the boosting method is to reduce bias in the ensemble decision".
+Other algorithms based on this approach include:
+ Adaptive Boosting
+ Stochastic Gradient Boosting or Gradient Boosting
+
+Important :-AdaBoost (Adaptive Boosting) It starts by predicting original data set and gives equal weight to each observation. If prediction is incorrect using the first learner, then it  gives higher weight to observation which have been predicted incorrectly. Being an iterative process, it continues to add learner(s) until a limit is reached in the number of models or accuracy.
+
+Stochastic Gradient Boosting or Gradient Boosting:-
+In gradient boosting, it trains many model sequentially. Each new model gradually minimizes the loss function (y = ax + b + e, e needs special attention as it is an error term) of the hole system using Gradient Descent method. The learning procedure consecutively fit new models to provide a more accurate estimate of the response variable. The principle idea behind this algorithm is to construct new base learners which can be maximally correlated with negative gradient of the loss function, associated with the whole ensemble.
+
+3. Majority Voting:-
+Majority voting is one of the earliest and easiest ensemble schemes In this method, an odd number of contributing classifiers are chosen, and for each sample, the predictions from the classifiers are computed. the class that gets most of the class from the classifier pool is deemed the ensemble’s predicted class. Such a method works well for binary classification problems, where there are only two candidates for which the classifiers can vote. However, it fails for a problem with many classes since many cases arise, where no class gets a clear majority of the votes.
+
+"Most common methods for automatic hyper parameter tuning: Random search and Grid search".
+
+Random Search -> it will make random combination
+Grid search -> it will make all combination
+
+Voting approach make odd no of algorithm.
+
+Ensemble learning Practice: Jan_24_Ensemble learning _ cancer_SURVIVAL_IMP.ipynb
+

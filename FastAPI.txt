@@ -1,0 +1,35 @@
+FastAPI
+
+StarLette one of the reason for make FastAPI fast
+
+AGSI
+
+HTTP Response Status Codes
+| Status Code | Action       | Description                                  |
+| ----------- | ------------ | -------------------------------------------- |
+| 200         | OK           | Successfully retrieved resource              |
+| 201         | Created      | A new resource was created                   |
+| 204         | No Content   | Request has nothing to return                |
+| 301 / 302   | Moved        | Moved to another location (redirect)         |
+| 400         | Bad Request  | Invalid request / syntax error               |
+| 401 / 403   | Unauthorized | Authentication failed / Access denied        |
+| 404         | Not Found    | Invalid resource was requested               |
+| 409         | Conflict     | Conflict was detected, e.g. duplicated email |
+| 500 / 503   | Server Error | Internal server error / Service unavailable  |
+
+GET — Fetch the list of books
+https://api.mybooks.com/books
+
+POST — Add a new book
+
+https://api.mybooks.com/books/1
+
+{
+  "id": 1,
+  "title": "Harry Potter Part ",
+  "author": "J.K. Rowling"
+}
+
+PUT — Replace the entire book record
+PATCH — Update part of the book record
+DELETE — Remove a book
